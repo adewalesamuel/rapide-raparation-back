@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreService as StoreServiceRequest;
+use App\Http\Requests\UpdateService as UpdateServiceRequest;
 
 class ServiceController extends Controller
 {
@@ -14,8 +16,15 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $service = Service::all();
+        $data = [
+            'success' => true,
+            'data' => $service
+        ];
+
+        return response()->json($data);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -33,9 +42,25 @@ class ServiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreServiceRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $service = new Service;
+
+        $service->nom = $validated['nom'];
+        $service->prix = $validated['prix'];
+        $service->type = $validated['type'];
+        $service->prestation_id = $validated['prestation_id'];
+
+        $service->save();
+
+        $data = [
+            'success' => true,
+            'data' => $service
+        ];
+
+        return response()->json($data, 200);
     }
 
     /**
@@ -46,7 +71,12 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        //
+        $data = [
+            'success' => true,
+            'data' => $service
+        ];
+
+        return response()->json($data);
     }
 
     /**
@@ -67,9 +97,23 @@ class ServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Service $service)
+    public function update(UpdateServiceRequest $request, Service $service)
     {
-        //
+        $validated = $request->validated();
+
+        $service->nom = $validated['nom'];
+        $service->prix = $validated['prix'];
+        $service->type = $validated['type'] ?? "particulier";
+        $service->prestation_id = $validated['prestation_id'];
+
+        $service->save();
+
+        $data = [
+            'success' => true,
+            'data' => $service
+        ];
+
+        return response()->json($data, 200); 
     }
 
     /**
@@ -80,6 +124,13 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        //
+        $service->delete();
+
+        $data = [
+            'success' => true,
+            'data' => $service
+        ];
+        
+        return response()->json($data);
     }
 }

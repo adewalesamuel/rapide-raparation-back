@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\SousCategorieController;
 use App\Http\Controllers\PrestationController;
+use App\Http\Controllers\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,9 @@ Route::get("/prestations/{prestation}", [PrestationController::class, 'show']);
 Route::post("/prestations", [PrestationController::class, 'store']);
 Route::put("/prestations/{prestation}", [PrestationController::class, 'update']);
 Route::delete("/prestations/{prestation}", [PrestationController::class, 'destroy']);
+
+Route::get("/services", [ServiceController::class, 'index']);
+Route::get("/services/{service}", [ServiceController::class, 'show']);
+Route::post("/services", [ServiceController::class, 'store']);
+Route::put("/services/{service}", [ServiceController::class, 'update']);
+Route::delete("/services/{service}", [ServiceController::class, 'destroy']);
