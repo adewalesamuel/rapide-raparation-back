@@ -25,6 +25,15 @@ class SousCategorieController extends Controller
         return response()->json($data);
     }
 
+    public function prestations(Request $request, SousCategorie $sousCategorie) {
+        $data = [
+            'success' => true,
+            'data' => $sousCategorie->prestations
+            ];
+
+        return response()->json($data, 200);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

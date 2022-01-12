@@ -18,4 +18,14 @@ class Categorie extends Model
     protected $fillable = [
         'nom',
     ];
+
+    /**
+     * Get all of the sous_categories for the Categorie
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function sous_categories()
+    {
+        return $this->hasMany(SousCategorie::class);
+    }
 }

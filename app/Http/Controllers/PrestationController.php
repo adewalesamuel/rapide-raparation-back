@@ -25,6 +25,15 @@ class PrestationController extends Controller
         return response()->json($data);
     }
 
+    public function services(Request $request, Prestation $prestation) {
+        $data = [
+            'success' => true,
+            'data' => $prestation->services
+            ];
+
+        return response()->json($data, 200);
+    }
+
 
     /**
      * Show the form for creating a new resource.

@@ -25,6 +25,15 @@ class CategorieController extends Controller
         return response()->json($data);
     }
 
+    public function sous_categories(Request $request, Categorie $categorie) {
+        $data = [
+            'success' => true,
+            'data' => $categorie->sous_categories
+            ];
+
+        return response()->json($data, 200);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
