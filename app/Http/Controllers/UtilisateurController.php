@@ -149,6 +149,14 @@ class UtilisateurController extends Controller
      */
     public function destroy(Utilisateur $utilisateur)
     {
-        //
+        $utilisateur->delete();
+        //Commandes
+
+        $data = [
+            'success' => true,
+            'data' => $utilisateur
+        ];
+        
+        return response()->json($data);
     }
 }
