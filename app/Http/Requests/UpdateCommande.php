@@ -39,6 +39,9 @@ class UpdateCommande extends FormRequest
             'date_execution' => 'date',
             'note' => 'integer',
             'order_id' => 'string',
+            'has_visite_technique' => 'boolean',
+            'note_visite_technique' => 'string',
+            'rapport_visite_file' => '',
         ];
     }
 }

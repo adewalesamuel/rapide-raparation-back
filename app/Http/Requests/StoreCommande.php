@@ -32,6 +32,7 @@ class StoreCommande extends FormRequest
             'order_id' => 'string',
             'lieu' => 'string',
             'description' => 'string',
+            'image' => '',
         ];
     }
 }

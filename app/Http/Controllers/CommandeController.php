@@ -61,6 +61,8 @@ class CommandeController extends Controller
         $commande->lieu = $validated['lieu'] ?? null;
         $commande->description = $validated['description'] ?? null;
 
+        //File $request->image
+
         $commande->save();
 
         $data = [
@@ -127,6 +129,10 @@ class CommandeController extends Controller
         $commande->description = $validated['description'] ?? null;
         $commande->note = $validated['note'] ?? null;
         $commande->date_execution = $validated['date_execution'] ?? null;
+        $commande->has_visite_technique = $validated['has_visite_technique'] ?? false;
+        $commande->note_visite_technique = $validated['note_visite_technique'] ?? null;
+
+        //File $request->rapport-visite_file
 
         $commande->save();
 

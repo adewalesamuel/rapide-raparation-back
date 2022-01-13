@@ -23,6 +23,7 @@ class CreateCommandesTable extends Migration
             ->onDelete('cascade');
             $table->integer('prix')->unsigned();
             $table->integer('quantite')->unsigned()->default(1);
+            $table->string('image_url')->nullable();
             $table->enum('status', ['non-verifie', 'appel', 'verifie', 'en-cours-visite', 'fin-visite', 'valide', 'annule', 'execution', 'termine'])->default('non-verifie');
             $table->bigInteger('technicien_id')->nullable();
             $table->bigInteger('commercial_id')->nullable();
@@ -34,6 +35,9 @@ class CreateCommandesTable extends Migration
             $table->string('lieu')->nullable();
             $table->date('date_execution')->nullable();
             $table->integer('note')->unsigned()->nullable();
+            $table->boolean('has_visite_technique')->nullable()->default(false);
+            $table->string('note_visite_technique')->nullable();
+            $table->string('rapport_visite_technique_url')->nullable();
             $table->timestamps();
         });
     }
