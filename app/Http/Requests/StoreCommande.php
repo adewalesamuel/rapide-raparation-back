@@ -28,8 +28,10 @@ class StoreCommande extends FormRequest
             'service_id' => 'required|integer|exists:services,id',
             'prix' => 'integer',
             'quantite' => 'integer',
-            'product' => 'string',
+            'materiel' => 'string',
             'order_id' => 'string',
+            'lieu' => 'string',
+            'description' => 'string',
         ];
     }
 }

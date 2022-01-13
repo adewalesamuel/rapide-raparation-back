@@ -30,8 +30,14 @@ class UpdateCommande extends FormRequest
             'status' => 'required|string',
             'quantite' => 'integer',
             'technicien_id' => 'integer|exists:utilisateurs,id',
+            'commercial_id' => 'integer|exists:utilisateurs,id',
+            'responsable_technique_id' => 'integer|exists:utilisateurs,id',
             'prestataire_id' => 'integer|exists:utilisateurs,id',
-            'product' => 'string',
+            'materiel' => 'string',
+            'lieu' => 'string',
+            'description' => 'string',
+            'date_execution' => 'date',
+            'note' => 'integer',
             'order_id' => 'string',
         ];
     }

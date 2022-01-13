@@ -56,8 +56,10 @@ class CommandeController extends Controller
         $commande->service_id = $validated['service_id'];
         $commande->prix = $validated['prix'] ?? null;
         $commande->quantite = $validated['quantite'] ?? 1; 
-        $commande->product = $validated['product'] ?? null;
+        $commande->materiel = $validated['materiel'] ?? null;
         $commande->order_id = $validated['order_id'] ?? null;
+        $commande->lieu = $validated['lieu'] ?? null;
+        $commande->description = $validated['description'] ?? null;
 
         $commande->save();
 
@@ -115,10 +117,16 @@ class CommandeController extends Controller
         $commande->prix = $validated['prix'] ?? null;
         $commande->quantite = $validated['quantite'] ?? 1; 
         $commande->status = $validated['status'] ?? 'non-verifié'; 
-        $commande->product = $validated['product'] ?? null;
+        $commande->materiel = $validated['materiel'] ?? null;
         $commande->technicien_id = $validated['technicien_id'] ?? null;
         $commande->prestataire_id = $validated['prestataire_id'] ?? null;
+        $commande->commercial_id = $validated['commercial_id'] ?? null;
+        $commande->responsable_technique_id = $validated['responsable_technique_id'] ?? null;
         $commande->order_id = $validated['order_id'] ?? null;
+        $commande->lieu = $validated['lieu'] ?? null;
+        $commande->description = $validated['description'] ?? null;
+        $commande->note = $validated['note'] ?? null;
+        $commande->date_execution = $validated['date_execution'] ?? null;
 
         $commande->save();
 

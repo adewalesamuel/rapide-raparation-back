@@ -25,9 +25,15 @@ class CreateCommandesTable extends Migration
             $table->integer('quantite')->unsigned()->default(1);
             $table->enum('status', ['non-verifie', 'appel', 'verifie', 'en-cours-visite', 'fin-visite', 'valide', 'annule', 'execution', 'termine'])->default('non-verifie');
             $table->bigInteger('technicien_id')->nullable();
+            $table->bigInteger('commercial_id')->nullable();
+            $table->bigInteger('responsable_technique_id')->nullable();
             $table->bigInteger('prestataire_id')->nullable();
-            $table->string('product')->nullable();
+            $table->string('materiel')->nullable();
             $table->string('order_id')->nullable();
+            $table->string('description')->nullable();
+            $table->string('lieu')->nullable();
+            $table->date('date_execution')->nullable();
+            $table->integer('note')->unsigned()->nullable();
             $table->timestamps();
         });
     }
