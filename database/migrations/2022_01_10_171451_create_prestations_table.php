@@ -15,7 +15,7 @@ class CreatePrestationsTable extends Migration
     {
         Schema::create('prestations', function (Blueprint $table) {
             $table->id();
-            $table->string('nom')->unique();
+            $table->string('nom');
             $table->foreignId('sous_categorie_id')
             ->constrained()
             ->onDelete('cascade');
