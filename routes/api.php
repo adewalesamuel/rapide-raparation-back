@@ -8,6 +8,7 @@ use App\Http\Controllers\PrestationController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UtilisateurController;
 use App\Http\Controllers\ApiAuthController;
+use App\Http\Controllers\CommandeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,13 +59,21 @@ Route::middleware('auth.api_token')->group(function() {
     
     Route::put("/services/{service}", [ServiceController::class, 'update']);    
     Route::post("/services", [ServiceController::class, 'store']);
-    
     Route::delete("/services/{service}", [ServiceController::class, 'destroy']);
+    
+    Route::get("/utilisateurs", [UtilisateurController::class, 'index']);
+    Route::get("/utilisateurs/{utilisateur}", [UtilisateurController::class, 'show']);
     Route::post("/utilisateurs", [UtilisateurController::class, 'store']);
     Route::put("/utilisateurs/{utilisateur}", [UtilisateurController::class, 'update']);
     Route::delete("/utilisateurs/{utilisateur}", [UtilisateurController::class, 'destroy']);
     
-    Route::get("/utilisateurs", [UtilisateurController::class, 'index']);
-    Route::get("/utilisateurs/{utilisateur}", [UtilisateurController::class, 'show']);
+    Route::get("/commandes", [CommandeController::class, 'index']);
+    Route::get("/commandes/{commande}", [CommandeController::class, 'show']);
+    Route::post("/commandes", [CommandeController::class, 'store']);
+    Route::put("/commandes/{commande}", [CommandeController::class, 'update']);
+    Route::delete("/commandes/{commande}", [CommandeController::class, 'destroy']);
+    
+
+
 });
 

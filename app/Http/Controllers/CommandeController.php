@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Commande;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreCommande as StoreCommandeRequest;
+use App\Http\Requests\UpdateCommande as UpdateCommandeRequest;
 
 class CommandeController extends Controller
 {
@@ -12,9 +14,20 @@ class CommandeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $commandes = Commande::with(["utilisateur", 'service'])->where('id', '>', 0);
+
+        if ($request->query('status')) $commandes = $commandes->where('status', $request->query('status'));
+
+        $commandes = $commandes->orderBy('created_at', 'desc')->get();
+
+        $data = [
+            'success' => true,
+            'data' => $commandes
+        ];
+
+        return response()->json($data);
     }
 
     /**
@@ -33,9 +46,27 @@ class CommandeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCommandeRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $commande = new Commande;
+
+        $commande->utilisateur_id = $validated['utilisateur_id'];
+        $commande->service_id = $validated['service_id'];
+        $commande->prix = $validated['prix'] ?? null;
+        $commande->quantite = $validated['quantite'] ?? 1; 
+        $commande->product = $validated['product'] ?? null;
+        $commande->order_id = $validated['order_id'] ?? null;
+
+        $commande->save();
+
+        $data = [
+            'success' => true,
+            'data' => $commande
+        ];
+
+        return response()->json($data, 200);
     }
 
     /**
@@ -46,7 +77,15 @@ class CommandeController extends Controller
      */
     public function show(Commande $commande)
     {
-        //
+        $commande = Commande::with(["utilisateur", 'service'])
+        ->where('id', $commande->id)->first();
+
+        $data = [
+            'success' => true,
+            'data' => $commande
+        ];
+
+        return response()->json($data);
     }
 
     /**
@@ -67,9 +106,28 @@ class CommandeController extends Controller
      * @param  \App\Models\Commande  $commande
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Commande $commande)
+    public function update(UpdateCommandeRequest $request, Commande $commande)
     {
-        //
+        $validated = $request->validated();
+
+        $commande->utilisateur_id = $validated['utilisateur_id'];
+        $commande->service_id = $validated['service_id'];
+        $commande->prix = $validated['prix'] ?? null;
+        $commande->quantite = $validated['quantite'] ?? 1; 
+        $commande->status = $validated['status'] ?? 'non-verifié'; 
+        $commande->product = $validated['product'] ?? null;
+        $commande->technicien_id = $validated['technicien_id'] ?? null;
+        $commande->prestataire_id = $validated['prestataire_id'] ?? null;
+        $commande->order_id = $validated['order_id'] ?? null;
+
+        $commande->save();
+
+        $data = [
+            'success' => true,
+            'data' => $commande
+        ];
+
+        return response()->json($data, 200);
     }
 
     /**
@@ -80,6 +138,13 @@ class CommandeController extends Controller
      */
     public function destroy(Commande $commande)
     {
-        //
+        $commande->delete();
+        
+        $data = [
+            'success' => true,
+            'data' => $commande
+        ];
+        
+        return response()->json($data);
     }
 }

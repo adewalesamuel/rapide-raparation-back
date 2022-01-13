@@ -6,6 +6,7 @@ use App\Models\Utilisateur;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUtilisateur as StoreUtilisateurRequest;
 use App\Http\Requests\UpdateUtilisateur as UpdateUtilisateurRequest;
+use App\Models\Commande;
 use Illuminate\Support\Str;
 
 class UtilisateurController extends Controller
@@ -151,8 +152,10 @@ class UtilisateurController extends Controller
      */
     public function destroy(Utilisateur $utilisateur)
     {
+        $commandes = Commande::where('utilisateur_id', $utilisateur->id);
+
         $utilisateur->delete();
-        //Commandes
+        $commandes->delete();
 
         $data = [
             'success' => true,

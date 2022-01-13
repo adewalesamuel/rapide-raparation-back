@@ -6,6 +6,9 @@ use App\Models\Categorie;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCategorie as StoreCategorieRequest;
 use App\Http\Requests\UpdateCategorie as UpdateCategorieRequest;
+use App\Models\Prestation;
+use App\Models\Service;
+use App\Models\SousCategorie;
 
 class CategorieController extends Controller
 {
@@ -124,10 +127,20 @@ class CategorieController extends Controller
      */
     public function destroy(Categorie $categorie)
     {   
+        $sous_categories = SousCategorie::where('categorie_id', $categorie->id);
+        $sous_categorie_ids = $sous_categories->get()->map(function ($item, $key) {
+            return $item->id;
+        });
+        $prestations = Prestation::whereIn('sous_categorie_id', $sous_categorie_ids);
+        $prestations_ids = $prestations->get()->map(function ($item, $key) {
+            return $item->id;
+        });
+        $services = Service::whereIn('prestation_id', $prestations_ids);
+
         $categorie->delete();
-        //sous-categorie
-        //Prestation
-        //Services
+        $sous_categories->delete();
+        $prestations->delete();
+        $services->delete();
 
         $data = [
             'success' => true,
