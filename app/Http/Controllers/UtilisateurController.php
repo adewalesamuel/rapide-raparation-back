@@ -6,6 +6,7 @@ use App\Models\Utilisateur;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUtilisateur as StoreUtilisateurRequest;
 use App\Http\Requests\UpdateUtilisateur as UpdateUtilisateurRequest;
+use Illuminate\Support\Str;
 
 class UtilisateurController extends Controller
 {
@@ -61,6 +62,7 @@ class UtilisateurController extends Controller
         $utilisateur->nom_prenoms = $validated['nom_prenoms'];
         $utilisateur->mail = $validated['mail'];
         $utilisateur->password = $validated['password'];
+        $utilisateur->api_token = Str::random(60);
         $utilisateur->telephone = $validated['telephone'];
         $utilisateur->date_naissance = $validated['date_naissance'] ?? null;
         $utilisateur->type = $validated['type'];

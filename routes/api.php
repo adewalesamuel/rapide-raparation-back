@@ -7,6 +7,7 @@ use App\Http\Controllers\SousCategorieController;
 use App\Http\Controllers\PrestationController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UtilisateurController;
+use App\Http\Controllers\ApiAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,38 +21,50 @@ use App\Http\Controllers\UtilisateurController;
 */
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
+    //     return $request->user();
+    // });
+    
+    
 Route::get("/categories", [CategorieController::class, 'index']);
 Route::get("/categories/{categorie}/sous-categories", [CategorieController::class, 'sous_categories']);
 Route::get("/categories/{categorie}", [CategorieController::class, 'show']);
-Route::post("/categories", [CategorieController::class, 'store']);
-Route::put("/categories/{categorie}", [CategorieController::class, 'update']);
-Route::delete("/categories/{categorie}", [CategorieController::class, 'destroy']);
 
 Route::get("/sous-categories", [SousCategorieController::class, 'index']);
 Route::get("/sous-categories/{sousCategorie}/prestations", [SousCategorieController::class, 'prestations']);
 Route::get("/sous-categories/{sousCategorie}", [SousCategorieController::class, 'show']);
-Route::post("/sous-categories", [SousCategorieController::class, 'store']);
-Route::put("/sous-categories/{sousCategorie}", [SousCategorieController::class, 'update']);
-Route::delete("/sous-categories/{sousCategorie}", [SousCategorieController::class, 'destroy']);
 
 Route::get("/prestations", [PrestationController::class, 'index']);
 Route::get("/prestations/{prestation}/services", [PrestationController::class, 'services']);
 Route::get("/prestations/{prestation}", [PrestationController::class, 'show']);
-Route::post("/prestations", [PrestationController::class, 'store']);
-Route::put("/prestations/{prestation}", [PrestationController::class, 'update']);
-Route::delete("/prestations/{prestation}", [PrestationController::class, 'destroy']);
 
 Route::get("/services", [ServiceController::class, 'index']);
 Route::get("/services/{service}", [ServiceController::class, 'show']);
-Route::post("/services", [ServiceController::class, 'store']);
-Route::put("/services/{service}", [ServiceController::class, 'update']);
-Route::delete("/services/{service}", [ServiceController::class, 'destroy']);
 
-Route::get("/utilisateurs", [UtilisateurController::class, 'index']);
-Route::get("/utilisateurs/{utilisateur}", [UtilisateurController::class, 'show']);
-Route::post("/utilisateurs", [UtilisateurController::class, 'store']);
-Route::put("/utilisateurs/{utilisateur}", [UtilisateurController::class, 'update']);
-Route::delete("/utilisateurs/{utilisateur}", [UtilisateurController::class, 'destroy']);
+Route::post('/login', [ApiAuthController::class, 'login']);
+Route::post('/logout', [ApiAuthController::class, 'logout']);
+    
+Route::middleware('auth.api_token')->group(function() {
+    Route::post("/categories", [CategorieController::class, 'store']);
+    Route::put("/categories/{categorie}", [CategorieController::class, 'update']);
+    Route::delete("/categories/{categorie}", [CategorieController::class, 'destroy']);
+    
+    Route::post("/sous-categories", [SousCategorieController::class, 'store']);
+    Route::put("/sous-categories/{sousCategorie}", [SousCategorieController::class, 'update']);
+    Route::delete("/sous-categories/{sousCategorie}", [SousCategorieController::class, 'destroy']);
+    
+    Route::post("/prestations", [PrestationController::class, 'store']);
+    Route::put("/prestations/{prestation}", [PrestationController::class, 'update']);
+    Route::delete("/prestations/{prestation}", [PrestationController::class, 'destroy']);
+    
+    Route::put("/services/{service}", [ServiceController::class, 'update']);    
+    Route::post("/services", [ServiceController::class, 'store']);
+    
+    Route::delete("/services/{service}", [ServiceController::class, 'destroy']);
+    Route::post("/utilisateurs", [UtilisateurController::class, 'store']);
+    Route::put("/utilisateurs/{utilisateur}", [UtilisateurController::class, 'update']);
+    Route::delete("/utilisateurs/{utilisateur}", [UtilisateurController::class, 'destroy']);
+    
+    Route::get("/utilisateurs", [UtilisateurController::class, 'index']);
+    Route::get("/utilisateurs/{utilisateur}", [UtilisateurController::class, 'show']);
+});
+

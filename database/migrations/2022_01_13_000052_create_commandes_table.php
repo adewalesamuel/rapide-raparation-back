@@ -26,7 +26,8 @@ class CreateCommandesTable extends Migration
             $table->enum('status', ['non-verifie', 'appel', 'verifie', 'en-cours-visite', 'fin-visite', 'valide', 'annule', 'execution', 'termine'])->default('non-verifie');
             $table->bigInteger('technicien_id')->nullable();
             $table->bigInteger('prestataire_id')->nullable();
-            $table->boolean('has_product')->nullable()->default(false);
+            $table->string('product')->nullable();
+            $table->string('order_id')->nullable();
             $table->timestamps();
         });
     }
