@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +15,20 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/connexion', [AuthController::class, 'loginForm'])->name('connexion');
+Route::get('/deconnexion', [AuthController::class, 'logout'])->name('logout');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+
+Route::middleware('auth')->group(function(){
+    Route::prefix('admin')->group(function() {
+        Route::name('admin.')->group(function(){
+            Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+        });
+    });
+
 });
 
-Route::prefix('admin')->group(function() {
-    Route::get('/', [AdminDashboardController::class, 'index']);
+Route::get('/', function () {
+    return view('welcome');
 });

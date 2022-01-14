@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class PrestationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,12 +13,8 @@ class DashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        $data = [
-            "title" => "Dashbaord",
-        ];
-
-        return view('admin.dashboard', $data);
+    {
+        //
     }
 
     /**
