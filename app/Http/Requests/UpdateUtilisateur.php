@@ -26,14 +26,14 @@ class UpdateUtilisateur extends FormRequest
         return [
             'nom_prenoms' => 'required|string',
             'mail' => 'required|string',
-            'password' => 'string',
+            'password' => 'nullable|string',
             'telephone' => 'required|string',
-            'date_naissance' => 'date',
+            'date_naissance' => 'nullable|date',
             'type' => 'required|string',
-            'nom_entreprise' => 'string',
-            'registre_commerce' => 'string',
-            'dfe' => 'string',
-            'pc_code' => 'string',
+            'nom_entreprise' => 'nullable|string',
+            'registre_commerce' => 'nullable|string',
+            'dfe' => 'nullable|string',
+            'pc_code' => 'nullable|string',
         ];
     }
 }

@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreUtilisateur as StoreUtilisateurRequest;
+use App\Http\Requests\UpdateUtilisateur as UpdateUtilisateurRequest;
+use App\Models\Utilisateur;
+use Illuminate\Support\Str;
+use App\Http\Services\UtilisateurService;
 
 class UtilisateurController extends Controller
 {
@@ -12,9 +17,14 @@ class UtilisateurController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $data = [
+            'title' => "Liste des utilisateurs",
+            'utilisateurs' => UtilisateurService::getAll($request)
+        ];
+
+        return view('admin.utilisateurs.index', $data);
     }
 
     /**
@@ -24,7 +34,12 @@ class UtilisateurController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'title' => "Creer utilisateur",
+            'types' => ['client', 'commercial_terrain', 'commercial_sedentaire', 'commercial_grand_compte', 'responsable_technique', 'technicien', 'prestataire', 'commercial_influenceur', 'administrateur']
+        ];
+
+        return view('admin.utilisateurs.create', $data);
     }
 
     /**
@@ -33,9 +48,15 @@ class UtilisateurController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUtilisateurRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $utilisateur = UtilisateurService::store($validated);
+
+        $msg = "L'utilisateur a été créé avec succes !";
+
+        return redirect()->route('admin.utilisateurs.index')->with('success', $msg);
     }
 
     /**
@@ -55,9 +76,15 @@ class UtilisateurController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Utilisateur $utilisateur)
     {
-        //
+        $data = [
+            'title' => "Liste des utilisateurs",
+            'types' => ['client', 'commercial_terrain', 'commercial_sedentaire', 'commercial_grand_compte', 'responsable_technique', 'technicien', 'prestataire', 'commercial_influenceur', 'administrateur'],
+            'utilisateur' => $utilisateur
+        ];
+
+        return view('admin.utilisateurs.edit', $data);
     }
 
     /**
@@ -67,9 +94,15 @@ class UtilisateurController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUtilisateurRequest $request, Utilisateur $utilisateur)
     {
-        //
+        $validated = $request->validated();
+
+        $utilisateur = UtilisateurService::update($validated, $utilisateur);
+
+        $msg = "L'utilisateur a été modifié avec succes !";
+
+        return back()->with('success', $msg);
     }
 
     /**
@@ -78,8 +111,12 @@ class UtilisateurController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Utilisateur $utilisateur)
     {
-        //
+        $utilisateur = UtilisateurService::delete($utilisateur);
+
+        $msg = "L'utilisateur a été supprimé avec succes !";
+
+        return redirect()->route('admin.utilisateurs.index')->with('success', $msg);
     }
 }
