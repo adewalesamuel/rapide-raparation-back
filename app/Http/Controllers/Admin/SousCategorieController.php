@@ -3,6 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Services\SousCategorieService;
+use App\Models\Categorie;
+use App\Models\SousCategorie;
+use App\Http\Requests\StoreSousCategorie as StoreSousCategorieRequest;
+use App\Http\Requests\UpdateSousCategorie as UpdateSousCategorieRequest;
 use Illuminate\Http\Request;
 
 class SousCategorieController extends Controller
@@ -14,7 +19,12 @@ class SousCategorieController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'title' => "Liste des sous categories",
+            'sous_categories' => SousCategorieService::getAll(),
+        ];
+
+        return view('admin.sous-categories.index', $data);
     }
 
     /**
@@ -24,7 +34,12 @@ class SousCategorieController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'title' => "Creer sous categorie",
+            'categories' => Categorie::all()
+        ];
+
+        return view('admin.sous-categories.create', $data);
     }
 
     /**
@@ -33,9 +48,15 @@ class SousCategorieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSousCategorieRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        SousCategorieService::store($validated);
+
+        $msg = "La sous categorie a été créé avec succes !";
+
+        return redirect()->route('admin.sous-categories.index')->with('success', $msg);
     }
 
     /**
@@ -55,9 +76,15 @@ class SousCategorieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(SousCategorie $sousCategorie)
     {
-        //
+        $data = [
+            'title' => "Modifier la sous categorie",
+            'sous_categorie' => $sousCategorie,
+            'categories' => Categorie::all()
+        ];
+
+        return view('admin.sous-categories.edit', $data);
     }
 
     /**
@@ -67,9 +94,15 @@ class SousCategorieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateSousCategorieRequest $request, SousCategorie $sousCategorie)
     {
-        //
+        $validated = $request->validated();
+
+        SousCategorieService::update($validated, $sousCategorie);
+
+        $msg = "La sous categorie a été modifié avec succes !";
+
+        return back()->with('success', $msg);
     }
 
     /**
@@ -78,8 +111,12 @@ class SousCategorieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(SousCategorie $sousCategorie)
     {
-        //
+        SousCategorieService::delete($sousCategorie);
+
+        $msg = "La sous categorie a été supprimé avec succes !";
+
+        return redirect()->route('admin.sous-categories.index')->with('success', $msg);
     }
 }

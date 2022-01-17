@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreUtilisateur as StoreUtilisateurRequest;
 use App\Http\Requests\UpdateUtilisateur as UpdateUtilisateurRequest;
 use App\Models\Utilisateur;
-use Illuminate\Support\Str;
 use App\Http\Services\UtilisateurService;
 
 class UtilisateurController extends Controller
@@ -52,7 +51,7 @@ class UtilisateurController extends Controller
     {
         $validated = $request->validated();
 
-        $utilisateur = UtilisateurService::store($validated);
+        UtilisateurService::store($validated);
 
         $msg = "L'utilisateur a été créé avec succes !";
 
@@ -98,7 +97,7 @@ class UtilisateurController extends Controller
     {
         $validated = $request->validated();
 
-        $utilisateur = UtilisateurService::update($validated, $utilisateur);
+        UtilisateurService::update($validated, $utilisateur);
 
         $msg = "L'utilisateur a été modifié avec succes !";
 
@@ -113,7 +112,7 @@ class UtilisateurController extends Controller
      */
     public function destroy(Utilisateur $utilisateur)
     {
-        $utilisateur = UtilisateurService::delete($utilisateur);
+        UtilisateurService::delete($utilisateur);
 
         $msg = "L'utilisateur a été supprimé avec succes !";
 

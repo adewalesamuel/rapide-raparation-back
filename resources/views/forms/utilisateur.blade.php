@@ -19,7 +19,7 @@
     </div>
     <div class="form-group">
         <label for="type">Type de compte</label>
-        <select class="form-control" name="type" id="type" name="type">
+        <select class="form-control" name="type" id="type">
             @foreach ($types as $type)
             <option value={{$type}} {{ ( isset($utilisateur) && $utilisateur->type == $type) ? "selected" : null }}>{{$type}}</option>
             

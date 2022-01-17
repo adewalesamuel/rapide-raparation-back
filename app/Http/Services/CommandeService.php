@@ -3,8 +3,6 @@
 namespace App\Http\Services;
 
 use Illuminate\Http\Request;
-use App\Models\Utilisateur;
-use Illuminate\Support\Str;
 use App\Models\Commande;
 
 class CommandeService {
@@ -25,8 +23,6 @@ class CommandeService {
     }
     
     public static function store($validated) {
-        $validated = $request->validated();
-
         $commande = new Commande;
 
         $commande->utilisateur_id = $validated['utilisateur_id'];
@@ -46,8 +42,6 @@ class CommandeService {
     }
 
     public static function update($validated, Commande $commande) {
-        $validated = $request->validated();
-
         $commande->utilisateur_id = $validated['utilisateur_id'];
         $commande->service_id = $validated['service_id'];
         $commande->prix = $validated['prix'] ?? null;

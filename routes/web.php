@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\UtilisateurController as AdminUtilisateurController;
 use App\Http\Controllers\Admin\CommandeController as AdminCommandeController;
+use App\Http\Controllers\Admin\CategorieController as AdminCategorieController;
+use App\Http\Controllers\Admin\SousCategorieController as AdminSousCategorieController;
+use App\Http\Controllers\Admin\PrestationController as AdminPrestationController;
+use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 use App\Http\Controllers\AuthController;
 
 /*
@@ -36,6 +40,34 @@ Route::middleware('auth')->group(function(){
             Route::put('/commandes/{commande}', [AdminCommandeController::class, 'update'])->name('commandes.update');
             Route::delete('/commandes/{commande}', [AdminCommandeController::class, 'destroy'])->name('commandes.destroy');
             Route::get('/commandes', [AdminCommandeController::class, 'index'])->name('commandes.index');
+            
+            Route::get('/categories/{categorie}/modifier', [AdminCategorieController::class, 'edit'])->name('categories.edit');
+            Route::put('/categories/{categorie}', [AdminCategorieController::class, 'update'])->name('categories.update');
+            Route::delete('/categories/{categorie}', [AdminCategorieController::class, 'destroy'])->name('categories.destroy');
+            Route::get('/categories/creer', [AdminCategorieController::class, 'create'])->name('categories.create');
+            Route::post('/categories', [AdminCategorieController::class, 'store'])->name('categories.store');
+            Route::get('/categories', [AdminCategorieController::class, 'index'])->name('categories.index');
+            
+            Route::get('/sous-categories/{sousCategorie}/modifier', [AdminSousCategorieController::class, 'edit'])->name('sous-categories.edit');
+            Route::put('/sous-categories/{sousCategorie}', [AdminSousCategorieController::class, 'update'])->name('sous-categories.update');
+            Route::delete('/sous-categories/{sousCategorie}', [AdminSousCategorieController::class, 'destroy'])->name('sous-categories.destroy');
+            Route::get('/sous-categories/creer', [AdminSousCategorieController::class, 'create'])->name('sous-categories.create');
+            Route::post('/sous-categories', [AdminSousCategorieController::class, 'store'])->name('sous-categories.store');
+            Route::get('/sous-categories', [AdminSousCategorieController::class, 'index'])->name('sous-categories.index');
+            
+            Route::get('/prestations/{prestation}/modifier', [AdminPrestationController::class, 'edit'])->name('prestations.edit');
+            Route::put('/prestations/{prestation}', [AdminPrestationController::class, 'update'])->name('prestations.update');
+            Route::delete('/prestations/{prestation}', [AdminPrestationController::class, 'destroy'])->name('prestations.destroy');
+            Route::get('/prestations/creer', [AdminPrestationController::class, 'create'])->name('prestations.create');
+            Route::post('/prestations', [AdminPrestationController::class, 'store'])->name('prestations.store');
+            Route::get('/prestations', [AdminPrestationController::class, 'index'])->name('prestations.index');
+           
+            Route::get('/services/{service}/modifier', [AdminServiceController::class, 'edit'])->name('services.edit');
+            Route::put('/services/{service}', [AdminServiceController::class, 'update'])->name('services.update');
+            Route::delete('/services/{service}', [AdminServiceController::class, 'destroy'])->name('services.destroy');
+            Route::get('/services/creer', [AdminServiceController::class, 'create'])->name('services.create');
+            Route::post('/services', [AdminServiceController::class, 'store'])->name('services.store');
+            Route::get('/services', [AdminServiceController::class, 'index'])->name('services.index');
 
             Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
         });

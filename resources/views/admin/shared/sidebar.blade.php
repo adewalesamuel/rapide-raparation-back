@@ -32,6 +32,37 @@
           </ul>
         </div>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="collapse" href="#services" aria-expanded="false" aria-controls="services">
+          <i class="menu-icon mdi mdi-card-text-outline"></i>
+          <span class="menu-title">Services</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="services">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('admin.categories.index')}}">
+                Categories
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('admin.sous-categories.index')}}">
+                Sous categories
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('admin.prestations.index')}}">
+                Prestations
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('admin.services.index')}}">
+                Services
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
       <li class="nav-item nav-category">Forms and Datas</li>
       <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
