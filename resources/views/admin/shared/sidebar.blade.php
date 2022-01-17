@@ -1,23 +1,34 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="/admin">
           <i class="mdi mdi-grid-large menu-icon"></i>
-          <span class="menu-title">Dashboard</span>
+          <span class="menu-title">Tableau de bord</span>
         </a>
       </li>
-      <li class="nav-item nav-category">UI Elements</li>
       <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-          <i class="menu-icon mdi mdi-floor-plan"></i>
-          <span class="menu-title">UI Elements</span>
-          <i class="menu-arrow"></i> 
+        <a class="nav-link" data-bs-toggle="collapse" href="#utlisateur" aria-expanded="false" aria-controls="utlisateur">
+          <i class="menu-icon mdi mdi-card-text-outline"></i>
+          <span class="menu-title">Utilisateurs</span>
+          <i class="menu-arrow"></i>
         </a>
-        <div class="collapse" id="ui-basic">
+        <div class="collapse" id="utlisateur">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('admin.utilisateurs.index', ['type' => 'administrateur'])}}">
+                Administrateurs
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('admin.utilisateurs.index', ['type' => 'client'])}}">
+                Clients
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('admin.utilisateurs.index', ['type' => 'commercial_sedentaire'])}}">
+                Com. Sedentaires
+              </a>
+            </li>
           </ul>
         </div>
       </li>

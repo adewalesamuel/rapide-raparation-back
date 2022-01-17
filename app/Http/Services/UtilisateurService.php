@@ -1,23 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Services;
 
-use App\Models\Utilisateur;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreUtilisateur as StoreUtilisateurRequest;
-use App\Http\Requests\UpdateUtilisateur as UpdateUtilisateurRequest;
-use App\Models\Commande;
+use App\Models\Utilisateur;
 use Illuminate\Support\Str;
+use App\Models\Commande;
 
-class UtilisateurController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
-    {   
+class UtilisateurService {
+
+    public static function getAll(Request $request) {
         $type = !$request->query('type') ? "client" : $request->query('type'); 
         $utilisateurs = Utilisateur::where('type', $type);
 
@@ -29,35 +21,11 @@ class UtilisateurController extends Controller
         if ($request->query('nom_prenoms')) $utilisateurs = $utilisateurs->where('nom_prenoms', 'like', '%' . $request->query('nom_prenoms') . '%');
 
         $utilisateurs = $utilisateurs->orderBy('created_at', 'desc')->get();
-
-        $data = [
-            'success' => true,
-            'data' => $utilisateurs
-        ];
-
-        return response()->json($data);
+        
+        return $utilisateurs;
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreUtilisateurRequest $request)
-    {
-        $validated = $request->validated();
-
+    
+    public static function store($validated) {
         $utilisateur = new Utilisateur;
 
         $utilisateur->nom_prenoms = $validated['nom_prenoms'];
@@ -73,53 +41,11 @@ class UtilisateurController extends Controller
         $utilisateur->pc_code = $validated['pc_code'] ?? null;
 
         $utilisateur->save();
-
-        $data = [
-            'success' => true,
-            'data' => $utilisateur
-        ];
-
-        return response()->json($data, 200);
+        
+        return $utilisateur;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Utilisateur  $utilisateur
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Utilisateur $utilisateur)
-    {
-        $data = [
-            'success' => true,
-            'data' => $utilisateur
-        ];
-
-        return response()->json($data);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Utilisateur  $utilisateur
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Utilisateur $utilisateur)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Utilisateur  $utilisateur
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateUtilisateurRequest $request, Utilisateur $utilisateur)
-    {
-        $validated = $request->validated();
-
+    public static function update($validated, Utilisateur $utilisateur) {
         $utilisateur->nom_prenoms = $validated['nom_prenoms'];
         $utilisateur->mail = $validated['mail'];
         $utilisateur->telephone = $validated['telephone'];
@@ -133,33 +59,16 @@ class UtilisateurController extends Controller
         if ($validated['password']) $utilisateur->password = $validated['password'];
         
         $utilisateur->save();
-
-        $data = [
-            'success' => true,
-            'data' => $utilisateur
-        ];
-
-        return response()->json($data, 200);
+        
+        return $utilisateur;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Utilisateur  $utilisateur
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Utilisateur $utilisateur)
-    {
+    public static function delete(Utilisateur $utilisateur) {
         $commandes = Commande::where('utilisateur_id', $utilisateur->id);
 
         $utilisateur->delete();
         $commandes->delete();
 
-        $data = [
-            'success' => true,
-            'data' => $utilisateur
-        ];
-        
-        return response()->json($data);
-    }
+        return $utilisateur;
+    } 
 }
