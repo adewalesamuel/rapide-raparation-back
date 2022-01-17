@@ -44,7 +44,7 @@
     </div>
     <div class="form-group">
       <label for="password">Mot de passe</label>
-      <input type="password" class="form-control" id="password" name="password"  placeholder="" value="{{env('DEFAULT_PASSWORD') ?? ''}}">
+      <input type="text" class="form-control" id="password" name="password"  placeholder="" value="{{env('DEFAULT_PASSWORD') ?? ''}}">
     </div>
     <button type="submit" class="btn btn-primary me-2">Enregister</button>
     <button class="btn btn-secondary" onclick="event.preventDefault(); history.back()">Annuler</button>
