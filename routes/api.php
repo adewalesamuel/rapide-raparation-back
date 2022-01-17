@@ -72,8 +72,5 @@ Route::middleware('auth.api_token')->group(function() {
     Route::post("/commandes", [CommandeController::class, 'store']);
     Route::put("/commandes/{commande}", [CommandeController::class, 'update']);
     Route::delete("/commandes/{commande}", [CommandeController::class, 'destroy']);
-    
-
-
 });
 
