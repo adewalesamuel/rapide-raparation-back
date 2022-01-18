@@ -80,7 +80,7 @@ class ServiceController extends Controller
     public function edit(Service $service)
     {
         $data = [
-            'title' => "Modifier la sous categorie",
+            'title' => "Modifier le service",
             'service' => $service,
             'prestations' => Prestation::all(),
             'types' => ['particulier', 'entreprise']

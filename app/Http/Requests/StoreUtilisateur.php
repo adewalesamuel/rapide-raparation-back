@@ -33,7 +33,7 @@ class StoreUtilisateur extends FormRequest
             'nom_entreprise' => 'nullable|string',
             'registre_commerce' => 'nullable|string',
             'dfe' => 'nullable|string',
-            'pc_code' => 'nullable|string|exists:utilisateurs',
+            'pc_code' => 'nullable|string',
         ];
     }
 }

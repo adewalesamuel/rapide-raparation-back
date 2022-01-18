@@ -35,7 +35,7 @@ class SousCategorieController extends Controller
     public function create()
     {
         $data = [
-            'title' => "Creer sous categorie",
+            'title' => "Creer une sous categorie",
             'categories' => Categorie::all()
         ];
 

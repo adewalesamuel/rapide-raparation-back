@@ -34,7 +34,7 @@ class CategorieController extends Controller
     public function create()
     {
         $data = [
-            'title' => "Creer categorie"
+            'title' => "Creer une categorie"
         ];
 
         return view('admin.categories.create', $data);

@@ -78,7 +78,7 @@ class PrestationController extends Controller
     public function edit(Prestation $prestation)
     {
         $data = [
-            'title' => "Modifier la sous categorie",
+            'title' => "Modifier la prestation",
             'prestation' => $prestation,
             'sous_categories' => SousCategorie::all()
         ];

@@ -26,13 +26,13 @@ class StoreCommande extends FormRequest
         return [
             'utilisateur_id' => 'required|integer|exists:utilisateurs,id',
             'service_id' => 'required|integer|exists:services,id',
-            'prix' => 'integer',
-            'quantite' => 'integer',
-            'materiel' => 'string',
-            'order_id' => 'string',
-            'lieu' => 'string',
-            'description' => 'string',
-            'image' => '',
+            'prix' => 'nullable|integer',
+            'quantite' => 'nullable|integer',
+            'materiel' => 'nullable|string',
+            'order_id' => 'nullable|string',
+            'lieu' => 'nullable|string',
+            'description' => 'nullable|string',
+            'image' => 'nullable|file:jpg,png,pdf,webp,svg',
         ];
     }
 }

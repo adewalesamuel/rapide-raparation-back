@@ -3,7 +3,7 @@
 <div class="card">
   @include('shared.alert-messages')
   <div class="card-body">
-    <h4 class="card-title">Liste des utilisateurs</h4>
+    <h4 class="card-title">Liste des utilisateurs “{{request()->query('type') ?? 'client'}}“</h4>
     <div style="text-align: right">
       <a href="{{ route('admin.utilisateurs.create') }}" class="btn btn-sm btn-primary">
           <i class=" mdi mdi-plus font-20" style="vertical-align: middle"></i> Créer un utilisateur

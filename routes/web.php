@@ -38,6 +38,8 @@ Route::middleware('auth')->group(function(){
 
             Route::get('/commandes/{commande}/modifier', [AdminCommandeController::class, 'edit'])->name('commandes.edit');
             Route::put('/commandes/{commande}', [AdminCommandeController::class, 'update'])->name('commandes.update');
+            Route::get('/commandes/creer', [AdminCommandeController::class, 'create'])->name('commandes.create');
+            Route::post('/commandes', [AdminCommandeController::class, 'store'])->name('commandes.update');
             Route::delete('/commandes/{commande}', [AdminCommandeController::class, 'destroy'])->name('commandes.destroy');
             Route::get('/commandes', [AdminCommandeController::class, 'index'])->name('commandes.index');
             

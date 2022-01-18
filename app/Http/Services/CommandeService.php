@@ -14,11 +14,6 @@ class CommandeService {
 
         $commandes = $commandes->orderBy('created_at', 'desc')->get();
 
-        $data = [
-            'success' => true,
-            'data' => $commandes
-        ];
-
         return $commandes;
     }
     

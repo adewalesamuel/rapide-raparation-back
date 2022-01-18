@@ -78,7 +78,7 @@ class UtilisateurController extends Controller
     public function edit(Utilisateur $utilisateur)
     {
         $data = [
-            'title' => "Liste des utilisateurs",
+            'title' => "Modifier l'utilisateur",
             'types' => ['client', 'commercial_terrain', 'commercial_sedentaire', 'commercial_grand_compte', 'responsable_technique', 'technicien', 'prestataire', 'commercial_influenceur', 'administrateur'],
             'utilisateur' => $utilisateur
         ];
