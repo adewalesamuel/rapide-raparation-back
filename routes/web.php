@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\UtilisateurController as AdminUtilisateurController;
 use App\Http\Controllers\Admin\CommandeController as AdminCommandeController;
@@ -8,7 +9,9 @@ use App\Http\Controllers\Admin\CategorieController as AdminCategorieController;
 use App\Http\Controllers\Admin\SousCategorieController as AdminSousCategorieController;
 use App\Http\Controllers\Admin\PrestationController as AdminPrestationController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
-use App\Http\Controllers\AuthController;
+
+use App\Http\Controllers\CommercialTerrain\ClientController as CommercialTerrainClientController;
+use App\Http\Controllers\CommercialTerrain\DashboardController as CommercialTerrainDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,8 +76,15 @@ Route::middleware('auth')->group(function(){
 
             Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
         });
-    });
 
+    });
+    
+    Route::prefix('commercial-terrain')->group((function() {
+        Route::name('commercial-terrain.')->group(function(){
+            Route::get('/clients/creer', [CommercialTerrainClientController::class, 'create'])->name('clients.create');
+            Route::get('/', [CommercialTerrainDashboardController::class, 'index'])->name('dashboard');
+        });
+    }));
 });
 
 Route::get('/', function () {

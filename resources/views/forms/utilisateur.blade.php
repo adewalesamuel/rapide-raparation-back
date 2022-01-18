@@ -39,8 +39,12 @@
         <input type="text" class="form-control" id="dfe"  name="dfe" placeholder="" value="{{ $utilisateur->dfe ?? '' }}">
     </div>
     <div class="form-group">
-        <label for="pc_code">PC CODE</label>
+      <label for="pc_code">PC CODE</label>
+      @if (auth()->user()->type == "commercial_terrain")
+        <input type="text" class="form-control" id="pc_code"  name="pc_code" placeholder="" value="{{ auth()->user()->pc_code ?? '' }}"> 
+      @else
         <input type="text" class="form-control" id="pc_code"  name="pc_code" placeholder="" value="{{ $utilisateur->pc_code ?? '' }}">
+      @endif
     </div>
     <div class="form-group">
       <label for="password">Mot de passe</label>

@@ -55,6 +55,9 @@ class UtilisateurController extends Controller
 
         $msg = "L'utilisateur a été créé avec succes !";
 
+        if (auth()->user()->type == 'commercial_terrain')
+            return redirect()->back()->with('success', $msg);
+
         return redirect()->route('admin.utilisateurs.index')->with('success', $msg);
     }
 
