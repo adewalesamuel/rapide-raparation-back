@@ -6,6 +6,7 @@ use App\Models\Commande;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCommande as StoreCommandeRequest;
 use App\Http\Requests\UpdateCommande as UpdateCommandeRequest;
+use App\Http\Services\CommandeService;
 
 class CommandeController extends Controller
 {
@@ -16,12 +17,7 @@ class CommandeController extends Controller
      */
     public function index(Request $request)
     {
-        $commandes = Commande::with(["utilisateur", 'service'])->where('id', '>', 0);
-
-        if ($request->query('status')) $commandes = $commandes->where('status', $request->query('status'));
-
-        $commandes = $commandes->orderBy('created_at', 'desc')->get();
-
+        $commandes = CommandeService::getAll($request);
         $data = [
             'success' => true,
             'data' => $commandes
@@ -49,22 +45,7 @@ class CommandeController extends Controller
     public function store(StoreCommandeRequest $request)
     {
         $validated = $request->validated();
-
-        $commande = new Commande;
-
-        $commande->utilisateur_id = $validated['utilisateur_id'];
-        $commande->service_id = $validated['service_id'];
-        $commande->prix = $validated['prix'] ?? null;
-        $commande->quantite = $validated['quantite'] ?? 1; 
-        $commande->materiel = $validated['materiel'] ?? null;
-        $commande->order_id = $validated['order_id'] ?? null;
-        $commande->lieu = $validated['lieu'] ?? null;
-        $commande->description = $validated['description'] ?? null;
-
-        //File $request->image
-
-        $commande->save();
-
+        $commande = CommandeService::store($validated);
         $data = [
             'success' => true,
             'data' => $commande
@@ -113,29 +94,7 @@ class CommandeController extends Controller
     public function update(UpdateCommandeRequest $request, Commande $commande)
     {
         $validated = $request->validated();
-
-        $commande->utilisateur_id = $validated['utilisateur_id'];
-        $commande->service_id = $validated['service_id'];
-        $commande->prix = $validated['prix'] ?? null;
-        $commande->quantite = $validated['quantite'] ?? 1; 
-        $commande->status = $validated['status'] ?? 'non-verifié'; 
-        $commande->materiel = $validated['materiel'] ?? null;
-        $commande->technicien_id = $validated['technicien_id'] ?? null;
-        $commande->prestataire_id = $validated['prestataire_id'] ?? null;
-        $commande->commercial_id = $validated['commercial_id'] ?? null;
-        $commande->responsable_technique_id = $validated['responsable_technique_id'] ?? null;
-        $commande->order_id = $validated['order_id'] ?? null;
-        $commande->lieu = $validated['lieu'] ?? null;
-        $commande->description = $validated['description'] ?? null;
-        $commande->note = $validated['note'] ?? null;
-        $commande->date_execution = $validated['date_execution'] ?? null;
-        $commande->has_visite_technique = $validated['has_visite_technique'] ?? false;
-        $commande->note_visite_technique = $validated['note_visite_technique'] ?? null;
-
-        //File $request->rapport-visite_file
-
-        $commande->save();
-
+        $commande = CommandeService::update($validated, $commande);
         $data = [
             'success' => true,
             'data' => $commande
@@ -151,12 +110,10 @@ class CommandeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Commande $commande)
-    {
-        $commande->delete();
-        
+    {        
         $data = [
             'success' => true,
-            'data' => $commande
+            'data' => CommandeService::delete($commande)
         ];
         
         return response()->json($data);

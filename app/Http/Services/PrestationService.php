@@ -10,7 +10,7 @@ class PrestationService {
         return Prestation::with('sous_categorie')->orderBy('created_at', 'desc')->get();
     }
 
-    public function services(Prestation $prestation) {
+    public static function services(Prestation $prestation) {
         return $prestation->services;
     }
     

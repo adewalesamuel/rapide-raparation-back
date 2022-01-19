@@ -41,7 +41,7 @@
     <div class="form-group">
       <label for="pc_code">PC CODE</label>
       @if (auth()->user()->type == "commercial_terrain")
-        <input type="text" class="form-control" id="pc_code"  name="pc_code" placeholder="" value="{{ auth()->user()->pc_code ?? '' }}"> 
+        <input type="text" class="form-control" id="pc_code" readonly name="pc_code" placeholder="" value="{{ auth()->user()->pc_code ?? '' }}"> 
       @else
         <input type="text" class="form-control" id="pc_code"  name="pc_code" placeholder="" value="{{ $utilisateur->pc_code ?? '' }}">
       @endif

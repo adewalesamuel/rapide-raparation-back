@@ -15,7 +15,7 @@ class CategorieService {
         return $categories;
     }
 
-    public function sous_categories(Categorie $categorie) {
+    public static function sous_categories(Categorie $categorie) {
         return $categorie->sous_categories;
     }
     

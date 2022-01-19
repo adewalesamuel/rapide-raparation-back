@@ -11,8 +11,8 @@ class SousCategorieService {
         return SousCategorie::with('categorie')->orderBy('created_at', 'desc')->get();
     }
 
-    public function prestation(SousCategorie $sous_categorie) {
-        return $sous_categorie->prestation;
+    public static function prestations(SousCategorie $sous_categorie) {
+        return $sous_categorie->prestations;
     }
     
     public static function store($validated) {

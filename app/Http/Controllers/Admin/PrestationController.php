@@ -17,10 +17,11 @@ class PrestationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        $prestations = PrestationService::getAll();
         $data = [
             'title' => "Liste des prestations",
-            'prestations' => PrestationService::getAll(),
+            'prestations' => $prestations,
         ];
 
         return view('admin.prestations.index', $data);
@@ -50,7 +51,7 @@ class PrestationController extends Controller
     public function store(StorePrestationRequest $request)
     {
         $validated = $request->validated();
-
+        
         PrestationService::store($validated);
 
         $msg = "La prestation a été créé avec succes !";
