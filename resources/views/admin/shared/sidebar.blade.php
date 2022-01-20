@@ -74,5 +74,11 @@
           <span class="menu-title">Commandes</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{route('admin.rapport.index')}}">
+          <i class="menu-icon mdi mdi-card-text-outline"></i>
+          <span class="menu-title">Rapport</span>
+        </a>
+      </li>
     </ul>
   </nav>

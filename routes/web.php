@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CategorieController as AdminCategorieController;
 use App\Http\Controllers\Admin\SousCategorieController as AdminSousCategorieController;
 use App\Http\Controllers\Admin\PrestationController as AdminPrestationController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
+use App\Http\Controllers\Admin\RapportController as AdminRapportController;
 
 use App\Http\Controllers\CommercialTerrain\ClientController as CommercialTerrainClientController;
 use App\Http\Controllers\CommercialTerrain\DashboardController as CommercialTerrainDashboardController;
@@ -76,6 +77,8 @@ Route::middleware('auth')->group(function(){
             Route::get('/services/creer', [AdminServiceController::class, 'create'])->name('services.create');
             Route::post('/services', [AdminServiceController::class, 'store'])->name('services.store');
             Route::get('/services', [AdminServiceController::class, 'index'])->name('services.index');
+            
+            Route::get('/rapports', [AdminRapportController::class, 'index'])->name('rapport.index');
 
             Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
         });
