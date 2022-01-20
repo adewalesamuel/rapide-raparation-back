@@ -3,7 +3,7 @@
 <div class="col-lg-4 mx-auto">
     <div class="auth-form-light text-left py-5 px-4 px-sm-5">
       <div class="brand-logo">
-        <img src="images/logo.svg" alt="logo">
+        <img src="images/logo.png" alt="logo">
       </div>
       <h4>Bienvnue chez {{ env("APP_NAME") ?? ''}}</h4>
       <h6 class="fw-light">Connectez vous pour continuer</h6>

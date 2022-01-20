@@ -7,7 +7,7 @@
       </div>
       <div>
         <a class="navbar-brand brand-logo" href="{{route('admin.dashboard')}}">
-          <img src={{asset("images/logo.svg")}} alt="logo" />
+          <img src={{asset("images/logo.png")}} alt="logo" />
         </a>
         <a class="navbar-brand brand-logo-mini" href="{{route('admin.dashboard')}}">
           <img src={{asset("images/logo-mini.svg")}} alt="logo" />
