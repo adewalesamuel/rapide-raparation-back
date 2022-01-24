@@ -8,7 +8,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{route('commercial-terrain.clients.create')}}">
-          <i class="menu-icon mdi mdi-card-text-outline"></i>
+          <i class="menu-icon mdi mdi-worker"></i>
           <span class="menu-title">Inscription client</span>
         </a>
       </li>

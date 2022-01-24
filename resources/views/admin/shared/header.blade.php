@@ -20,6 +20,7 @@
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href={{asset("css/vertical-layout-light/style.css")}}>
+  <link rel="stylesheet" href={{asset("css/main.css")}}>
   <!-- endinject -->
   <link rel="shortcut icon" href={{asset("images/favicon.png")}} />
 </head>

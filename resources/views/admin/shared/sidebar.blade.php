@@ -2,13 +2,13 @@
     <ul class="nav">
       <li class="nav-item">
         <a class="nav-link" href="{{route('admin.dashboard')}}">
-          <i class="mdi mdi-grid-large menu-icon"></i>
+          <i class="mdi mdi-airplay menu-icon"></i>
           <span class="menu-title">Tableau de bord</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#utlisateur" aria-expanded="false" aria-controls="utlisateur">
-          <i class="menu-icon mdi mdi-card-text-outline"></i>
+          <i class="menu-icon mdi mdi-worker"></i>
           <span class="menu-title">Utilisateurs</span>
           <i class="menu-arrow"></i>
         </a>
@@ -39,7 +39,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#services" aria-expanded="false" aria-controls="services">
-          <i class="menu-icon mdi mdi-card-text-outline"></i>
+          <i class="menu-icon mdi mdi-wallet-travel"></i>
           <span class="menu-title">Services</span>
           <i class="menu-arrow"></i>
         </a>
@@ -70,13 +70,13 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{route('admin.commandes.index')}}">
-          <i class="menu-icon mdi mdi-card-text-outline"></i>
+          <i class="menu-icon mdi mdi-cart-outline"></i>
           <span class="menu-title">Commandes</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{route('admin.rapport.index')}}">
-          <i class="menu-icon mdi mdi-card-text-outline"></i>
+          <i class="menu-icon mdi mdi-chart-bar"></i>
           <span class="menu-title">Rapport</span>
         </a>
       </li>

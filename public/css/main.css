@@ -2,3 +2,11 @@
     background: #cbf0ee;
     color: #288a84;
 }
+
+.sidebar .nav.sub-menu .nav-item::before {
+    display: none;
+}
+
+a {
+    text-decoration: none;
+}
