@@ -1,31 +1,31 @@
+.non-verifie, .verifie, .en-cours-visite,
+.valide, .execution, .annule {
+    color: white;
+    font-weight: bolder;
+}
+
 .non-verifie {
-    background: #f0cbcb;
-    color: #8a2828;
+    background-color: #8a2828;
 }
 
 .verifie {
-    background: #cbd8f0;
-    color: #282f8a;
+    background-color: #282f8a;
 }
 
 .en-cours-visite {
-    background: #f0efcb;
-    color: #838a28;
+    background-color: #838a28;
 }
 
 .valide {
-    background: #cbf0dc;
-    color: #288a50;
+    background-color: #288a50;
 }
 
 .execution {
-    background: #ffc281;
-    color: #af5d16;
+    background-color: #af5d16;
 }
 
 .annule {
-    background: #d5d5d5;
-    color: #3c3c3c;
+    background-color: #3c3c3c;
 }
 .sidebar .nav.sub-menu .nav-item::before {
     display: none;

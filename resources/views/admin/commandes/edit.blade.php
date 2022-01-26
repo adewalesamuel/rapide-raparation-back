@@ -97,7 +97,9 @@
                   <div class="col-12 mb-2"><b>Coût après visite :</b>
                     <input type="number" name="prix" value="{{$commande->prix ?? '' }}" id="prix" form="commande"> Fcfa              
                   </div>
-                  <div class="col-12 mb-2"><b style="font-size: 22px">Montant total :</b> <span id="total-commande"></span></div>
+                  <div class="col-12 mb-2"><b style="font-size: 22px">Montant total :</b> 
+                    <span id="total-commande">{{$commande->prix ?? $commande->service->prix}}</span>
+                  </div>
                 </div>
               </div>
               <div class="card mb-3">
@@ -122,7 +124,7 @@
                           @endforeach
                       </select>
                   </div>
-                  <button type="submit" class="btn btn-primary me-2">Valideer</button>
+                  <button type="submit" class="btn btn-primary me-2">Valider</button>
                   {{-- <button class="btn btn-secondary" onclick="event.preventDefault(); history.back()">Annuler</button> --}}
                   </form>
                 </div>

@@ -6,11 +6,11 @@
           <span class="menu-title">Tableau de bord</span>
         </a>
       </li>
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a class="nav-link" href="{{route('commercial-terrain.clients.create')}}">
           <i class="menu-icon mdi mdi-worker"></i>
           <span class="menu-title">Inscription client</span>
         </a>
-      </li>
+      </li> --}}
     </ul>
   </nav>
