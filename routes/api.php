@@ -43,6 +43,7 @@ Route::get("/services/{service}", [ServiceController::class, 'show']);
 
 Route::post('/login', [ApiAuthController::class, 'login']);
 Route::post('/logout', [ApiAuthController::class, 'logout']);
+Route::post('/register', [UtilisateurController::class, 'store']);
     
 Route::middleware('auth.api_token')->group(function() {
     Route::post("/categories", [CategorieController::class, 'store']);
