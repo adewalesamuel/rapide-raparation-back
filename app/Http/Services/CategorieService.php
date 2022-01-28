@@ -23,6 +23,7 @@ class CategorieService {
         $categorie = new Categorie;
 
         $categorie->nom = $validated['nom'];
+        $categorie->description = $validated['description'] ?? null;
         $categorie->save();
 
         return $categorie;
@@ -30,6 +31,8 @@ class CategorieService {
 
     public static function update($validated, Categorie $categorie) {
         $categorie->nom = $validated['nom'];
+        $categorie->description = $validated['description'] ?? null;
+
         $categorie->save();
         
         return $categorie;

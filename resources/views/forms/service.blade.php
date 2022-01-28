@@ -13,8 +13,12 @@
       </select>
     </div>
     <div class="form-group">
-      <label for="nm">Nom</label>
+      <label for="nom">Nom</label>
       <input type="text" class="form-control" id="nom" name="nom" placeholder="" value="{{ $service->nom ?? '' }}">
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input type="text" class="form-control" id="description" name="description" placeholder="" value="{{ $service->description ?? '' }}">
     </div>
     <div class="form-group">
       <label for="prix">Prix</label>

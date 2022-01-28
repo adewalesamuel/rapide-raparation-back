@@ -25,7 +25,8 @@ use App\Http\Controllers\CommandeController;
     //     return $request->user();
     // });
     
-    
+Route::post("/commandes", [CommandeController::class, 'store']);
+
 Route::get("/categories", [CategorieController::class, 'index']);
 Route::get("/categories/{categorie}/sous-categories", [CategorieController::class, 'sous_categories']);
 Route::get("/categories/{categorie}", [CategorieController::class, 'show']);
@@ -70,7 +71,6 @@ Route::middleware('auth.api_token')->group(function() {
     
     Route::get("/commandes", [CommandeController::class, 'index']);
     Route::get("/commandes/{commande}", [CommandeController::class, 'show']);
-    Route::post("/commandes", [CommandeController::class, 'store']);
     Route::put("/commandes/{commande}", [CommandeController::class, 'update']);
     Route::delete("/commandes/{commande}", [CommandeController::class, 'destroy']);
 });

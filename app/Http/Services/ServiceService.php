@@ -21,6 +21,7 @@ class ServiceService {
         $service->prix = $validated['prix'];
         $service->type = $validated['type'];
         $service->prestation_id = $validated['prestation_id'];
+        $service->description = $validated['description'] ?? null;
 
         $service->save();
 
@@ -32,6 +33,7 @@ class ServiceService {
         $service->prix = $validated['prix'];
         $service->type = $validated['type'] ?? "particulier";
         $service->prestation_id = $validated['prestation_id'];
+        $service->description = $validated['description'] ?? null;
 
         $service->save();
         

@@ -24,7 +24,8 @@ class UpdateCategorie extends FormRequest
     public function rules()
     {
         return [
-            'nom' => 'required|string' 
+            'nom' => 'required|string',
+            'description' => 'nullable|string'
         ];
     }
 }
