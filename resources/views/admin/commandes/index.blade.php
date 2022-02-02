@@ -20,6 +20,7 @@
             <th>Service</th>
             <th>Date de commande</th>
             <th>Status</th>
+            <th>Niveau</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -33,12 +34,18 @@
                   </td>
                   <td>
                     <a href="{{route('admin.services.edit', $commande->service_id)}}">
-                      {{$commande->service->nom ?? ""}}</td>
+                      {{$commande->service->nom ?? ""}}
+                  </td>
                     </a>
                   <td>{{$commande->created_at ?? ""}}</td>
                   <td>
                     <span class="{{'badge badge-opacity-success me-3 ' . $commande->status ?? ''}}">
                       {{$commande->status ?? ""}}
+                    </span>
+                  </td>
+                  <td>
+                    <span class="badge badge-opacity-danger me-3" style="font-weight: bolder">
+                      {{$commande->is_urgent ? "URGENT" : ''}}
                     </span>
                   </td>
                   <td>

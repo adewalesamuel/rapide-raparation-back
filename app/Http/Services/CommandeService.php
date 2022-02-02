@@ -26,6 +26,7 @@ class CommandeService {
         $commande->quantite = $validated['quantite'] ?? 1; 
         $commande->materiel = $validated['materiel'] ?? null;
         $commande->order_id = $validated['order_id'] ?? null;
+        $commande->is_urgent = $validated['is_urgent'] ?? null;
         $commande->lieu = $validated['lieu'] ?? null;
         $commande->description = $validated['description'] ?? null;
 

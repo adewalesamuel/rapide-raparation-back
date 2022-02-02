@@ -31,6 +31,7 @@ class StoreCommande extends FormRequest
             'materiel' => 'nullable|string',
             'order_id' => 'nullable|string',
             'lieu' => 'nullable|string',
+            'is_urgent' => 'nullable|boolean',
             'description' => 'nullable|string',
             'image' => 'nullable|file:jpg,png,pdf,webp,svg',
         ];

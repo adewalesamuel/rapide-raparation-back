@@ -25,9 +25,6 @@ use App\Http\Controllers\CommercialTerrain\DashboardController as CommercialTerr
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('connexion');
-});
 Route::get('/connexion', [AuthController::class, 'loginForm'])->name('connexion');
 Route::get('/deconnexion', [AuthController::class, 'logout'])->name('logout');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -92,3 +89,7 @@ Route::middleware('auth')->group(function(){
         });
     }));
 });
+
+Route::get('/{any?}', function () {
+    return view('index');
+})->where('any', '.*?');
