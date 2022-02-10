@@ -19,7 +19,6 @@
             <th>Nom Prénom(s)</th>
             <th>Addresse mail</th>
             <th>N° de téléphone</th>
-            <th>Type</th>
             <th>Nom de l'entreprise</th>
             <th>Actions</th>
           </tr>
@@ -34,7 +33,6 @@
                   </td>
                   <td>{{$utilisateur->mail ?? ""}}</td>
                   <td>{{$utilisateur->telephone ?? ""}}</td>
-                  <td>{{$utilisateur->type ?? ""}}</td>
                   <td>{{$utilisateur->nom_entreprise ?? ""}}</td>
                   <td>
                     <a title="Supprimer">
