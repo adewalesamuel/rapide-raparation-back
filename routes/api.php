@@ -9,6 +9,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UtilisateurController;
 use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\CommandeController;
+use App\Http\Controllers\FrontEndController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,8 @@ use App\Http\Controllers\CommandeController;
     // });
     
 Route::post("/commandes", [CommandeController::class, 'store']);
+
+Route::post("/contact", [FrontEndController::class, 'contact']);
 
 Route::get("/categories", [CategorieController::class, 'index']);
 Route::get("/categories/{categorie}/sous-categories", [CategorieController::class, 'sous_categories']);
