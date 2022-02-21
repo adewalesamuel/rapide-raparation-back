@@ -21,5 +21,34 @@
             </div>
         </div> 
     </div>
+    <div class="row">
+        <div class="card col-sm-12">
+            <div class="card-body">
+                <div class="card-title">
+                    Meilleur commercial terrain
+                </div>
+                <div class="table-responsive pt-3">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Nom du commercial</th>
+                            <th>Addresse mail</th>
+                            <th>N° de téléphone</th>
+                            <th>Nombre total d'incris</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{$commercial->nom_prenoms ?? ""}}</td>
+                            <td>{{$commercial->mail ?? ""}}</td>
+                            <td>{{$commercial->telephone ?? ""}}</td>
+                            <td>{{$max_inscris ?? ""}}</td>
+                        </tr>            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+    </div>
 </div>    
 @endsection

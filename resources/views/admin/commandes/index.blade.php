@@ -45,7 +45,13 @@
                   </td>
                   <td>
                     <span class="badge badge-opacity-danger me-3" style="font-weight: bolder">
-                      {{$commande->is_urgent ? "URGENT" : ''}}
+                      @if ($commande->is_urgent)
+                        @if (\Str::length($commande->utilisateur->nom_entreprise) > 0)
+                          ENTREPRISE
+                        @else
+                          URGENT
+                        @endif
+                      @endif
                     </span>
                   </td>
                   <td>

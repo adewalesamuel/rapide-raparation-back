@@ -6,8 +6,17 @@
     <form class="forms-sample" action="" method="GET">
       @csrf
       <div class="form-group">
+        <label for="date_debut">Date debut</label>
+        <input type="date" class="form-control" id="date_debut" name="date_debut">
+      </div>
+      <div class="form-group">
+        <label for="date_fin">Date fin</label>
+        <input type="date" class="form-control" id="date_fin" name="date_fin">
+      </div>
+      <div class="form-group">
         <label for="pc_code">Pc code</label>
-        <input type="text" class="form-control" id="pc_code" name="pc_code" placeholder="" value="{{ request()->query('pc_code') ?? '' }}">
+        <input type="text" class="form-control" id="pc_code" name="pc_code" 
+        placeholder="" value="{{ request()->query('pc_code') ?? '' }}">
       </div>
       <button type="submit" class="btn btn-primary me-2">Rechercher</button>
   </form>
@@ -17,6 +26,9 @@
   @include('shared.alert-messages')
   <div class="card-body">
     <h4 class="card-title">Details de rapport</h4>
+    @if (count($clients) > 0)
+        <strong class="text-danger">Nombre de clients inscris : {{ count($clients)}}</strong>
+    @endif
     {{-- <p class="card-description">
       Add class 
     </p> --}}

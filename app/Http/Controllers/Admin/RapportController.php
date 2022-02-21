@@ -10,19 +10,25 @@ class RapportController extends Controller
 {
     public function index(Request $request) {
         $pc_code = $request->query('pc_code');
-        $clients = [];
+        $clients = null;
         $commerical = null;
-        
+    
         if ($pc_code && $pc_code != "") {
             $clients = Utilisateur::where('pc_code', $pc_code)
-            ->where('type', 'client')->get();
+            ->where('type', 'client');
+
+            if ($request->query('date_debut') && $request->query('date_fin')) {
+                $clients = $clients->whereBetween('created_at',
+                array($request->query('date_debut'),$request->query('date_fin')));
+            }
+
             $commerical = Utilisateur::where('pc_code', $pc_code)
             ->where('type', 'commercial_terrain')->first();
         }
 
         $data = [
             'title' => "Rapport des commerciaux terrain",
-            'clients' => $clients,
+            'clients' => $clients ? $clients->get() : [],
             'commercial' => $commerical
         ];
 

@@ -13,6 +13,10 @@
                     <div class="col-8">{{ $commande->utilisateur->nom_prenoms ?? "" }}</div>
                   </div>
                   <div class="row mb-3">
+                    <div class="col-4"><b>Nom de l'entreprise</b></div>
+                    <div class="col-8">{{ $commande->utilisateur->nom_entreprise ?? "" }}</div>
+                  </div>
+                  <div class="row mb-3">
                     <div class="col-4"><b>Numéro de téléphone :</b></div>
                     <div class="col-8">{{ $commande->utilisateur->telephone ?? "" }}</div>
                   </div>
