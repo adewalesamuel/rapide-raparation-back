@@ -26,9 +26,7 @@
   @include('shared.alert-messages')
   <div class="card-body">
     <h4 class="card-title">Details de rapport</h4>
-    @if (count($clients) > 0)
-        <strong class="text-danger">Nombre de clients inscris : {{ count($clients)}}</strong>
-    @endif
+    <strong class="text-danger">Nombre de clients inscris : {{ count($clients)}}</strong>
     {{-- <p class="card-description">
       Add class 
     </p> --}}

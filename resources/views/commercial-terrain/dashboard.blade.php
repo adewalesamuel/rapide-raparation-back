@@ -25,7 +25,7 @@
         <div class="card col-sm-12">
             <div class="card-body">
                 <div class="card-title">
-                    Meilleur commercial terrain
+                    Meilleur commercial terrain du jour
                 </div>
                 <div class="table-responsive pt-3">
                     <table class="table table-bordered">
@@ -34,16 +34,18 @@
                             <th>Nom du commercial</th>
                             <th>Addresse mail</th>
                             <th>N° de téléphone</th>
-                            <th>Nombre total d'incris</th>
+                            <th>Nombre total d'inscris</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>{{$commercial->nom_prenoms ?? ""}}</td>
-                            <td>{{$commercial->mail ?? ""}}</td>
-                            <td>{{$commercial->telephone ?? ""}}</td>
-                            <td>{{$max_inscris ?? ""}}</td>
-                        </tr>            
+                            @foreach ($meilleurs_commerciaux as $commercial)
+                                <tr>
+                                    <td>{{$commercial->nom_prenoms ?? ""}}</td>
+                                    <td>{{$commercial->mail ?? ""}}</td>
+                                    <td>{{$commercial->telephone ?? ""}}</td>
+                                    <td>{{$commercial->max_inscris ?? ""}}</td>
+                                </tr>            
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
