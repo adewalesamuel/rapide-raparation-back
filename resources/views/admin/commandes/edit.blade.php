@@ -54,8 +54,11 @@
                     <div class="col-8">{{ $commande->lieu ?? "" }}</div>
                   </div>
                   <div class="row mb-3">
-                    <div class="col-4"><b>Date d'excecution :</b></div>
-                    <div class="col-8">{{ $commande->date_execution ?? "" }}</div>
+                    <div class="col-4"><b>Date d'exécution :</b></div>
+                    {{-- <div class="col-8">{{ $commande->date_execution ?? "" }}</div> --}}
+                    <div class="col-8">
+                      <input type="date" name="date_execution" value="{{$commande->date_execution ? date('Y-m-d', strtotime($commande->date_execution)):  "" }}" id="date_execution" form="commande">
+                    </div>
                   </div>
                   <div class="row mb-3">
                     <div class="col-4"><b>Note du client :</b></div>

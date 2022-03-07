@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.2efd5865.css",
-    "main.js": "/static/js/main.51bd0adc.js",
+    "main.css": "/static/css/main.dcee2b3b.css",
+    "main.js": "/static/js/main.d0cefd9e.js",
     "static/js/787.7995d7fa.chunk.js": "/static/js/787.7995d7fa.chunk.js",
     "static/media/11zon_cropped 2.png": "/static/media/11zon_cropped 2.5ed99872b8853dc8eb71.png",
     "static/media/11zon_cropped-2.png": "/static/media/11zon_cropped-2.811e35030f7b06bffa97.png",
@@ -22,6 +22,7 @@
     "static/media/plaquette-presentation.png": "/static/media/plaquette-presentation.1b19e8fcd45a2e631efa.png",
     "static/media/gothic.woff": "/static/media/gothic.c79185d96f24335e2f6d.woff",
     "static/media/acceuil03.jpg": "/static/media/acceuil03.1099418883f1653eef6c.jpg",
+    "static/media/slide1.jpg": "/static/media/slide1.7a5c05bdf5b9c0cc2f77.jpg",
     "static/media/painting.png": "/static/media/painting.c36db04f76d5bdf07e24.png",
     "static/media/peinture.png": "/static/media/peinture.c36db04f76d5bdf07e24.png",
     "static/media/ac.png": "/static/media/ac.c7f9ac016eb2212c6e70.png",
@@ -57,12 +58,12 @@
     "static/media/ic_el.png": "/static/media/ic_el.792db9f3281668f584e1.png",
     "static/media/home.png": "/static/media/home.6ad471d5900b04d6cfd8.png",
     "index.html": "/index.html",
-    "main.2efd5865.css.map": "/static/css/main.2efd5865.css.map",
-    "main.51bd0adc.js.map": "/static/js/main.51bd0adc.js.map",
+    "main.dcee2b3b.css.map": "/static/css/main.dcee2b3b.css.map",
+    "main.d0cefd9e.js.map": "/static/js/main.d0cefd9e.js.map",
     "787.7995d7fa.chunk.js.map": "/static/js/787.7995d7fa.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2efd5865.css",
-    "static/js/main.51bd0adc.js"
+    "static/css/main.dcee2b3b.css",
+    "static/js/main.d0cefd9e.js"
   ]
 }
