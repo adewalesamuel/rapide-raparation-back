@@ -1,8 +1,10 @@
 #!/bin/bash
 
 echo Rapide deployment start...
+project_name="rapide-reparation"
 rapide_front_path="/Users/macbookair/Projects/rapide-front-end"
-rapide_back_path="/Users/macbookair/Projects/rapide-reparation"
+rapide_back_path="/Users/macbookair/Projects/$project_name"
+php_script=php
 
 echo build react app from $rapide_front_path
 cd $rapide_front_path
@@ -20,4 +22,12 @@ mv $rapide_back_path/resources/views/index.blade.php $rapide_back_path/resources
 echo rename index.html to index.blade in $rapide_back_path/resources/views
 mv $rapide_back_path/resources/views/index.html $rapide_back_path/resources/views/index.blade.php
 
-open http://localhost:8000/
+echo optimize laravel project
+cd $rapide_back_path
+$php_script artisan optimize
+$php_script artisan config:clear
+
+echo compress laravel project
+cd $rapide_back_path/../ 
+zip -r $project_name-prod.zip ./$project_name
+
