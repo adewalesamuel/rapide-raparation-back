@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Prestation;
+use App\Models\SousCategorie;
+use App\Http\Requests\StorePrestation as StorePrestationRequest;
+use App\Http\Requests\UpdatePrestation as UpdatePrestationRequest;
+use App\Http\Services\PrestationService;
 
 class PrestationController extends Controller
 {
@@ -13,8 +17,14 @@ class PrestationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   
+        $prestations = PrestationService::getAll();
+        $data = [
+            'title' => "Liste des prestations",
+            'prestations' => $prestations,
+        ];
+
+        return view('admin.prestations.index', $data);
     }
 
     /**
@@ -24,7 +34,12 @@ class PrestationController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'title' => "Creer une prestation",
+            'sous_categories' => SousCategorie::all()
+        ];
+
+        return view('admin.prestations.create', $data);
     }
 
     /**
@@ -33,9 +48,15 @@ class PrestationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePrestationRequest $request)
     {
-        //
+        $validated = $request->validated();
+        
+        PrestationService::store($validated);
+
+        $msg = "La prestation a été créé avec succes !";
+
+        return redirect()->route('admin.prestations.index')->with('success', $msg);
     }
 
     /**
@@ -44,9 +65,9 @@ class PrestationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+       //
     }
 
     /**
@@ -55,9 +76,15 @@ class PrestationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Prestation $prestation)
     {
-        //
+        $data = [
+            'title' => "Modifier la prestation",
+            'prestation' => $prestation,
+            'sous_categories' => SousCategorie::all()
+        ];
+
+        return view('admin.prestations.edit', $data);
     }
 
     /**
@@ -67,9 +94,15 @@ class PrestationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePrestationRequest $request, Prestation $prestation)
     {
-        //
+        $validated = $request->validated();
+
+        PrestationService::update($validated, $prestation);
+
+        $msg = "La prestation a été modifié avec succes !";
+
+        return back()->with('success', $msg);
     }
 
     /**
@@ -78,8 +111,12 @@ class PrestationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Prestation $prestation)
     {
-        //
+        PrestationService::delete($prestation);
+
+        $msg = "La prestation a été supprimé avec succes !";
+
+        return redirect()->route('admin.prestations.index')->with('success', $msg);
     }
 }

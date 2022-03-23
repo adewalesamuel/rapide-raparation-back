@@ -6,6 +6,7 @@ use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreService as StoreServiceRequest;
 use App\Http\Requests\UpdateService as UpdateServiceRequest;
+use App\Http\Services\ServiceService;
 
 class ServiceController extends Controller
 {
@@ -16,7 +17,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $service = Service::all();
+        $service = ServiceService::getAll();
         $data = [
             'success' => true,
             'data' => $service
@@ -45,16 +46,7 @@ class ServiceController extends Controller
     public function store(StoreServiceRequest $request)
     {
         $validated = $request->validated();
-
-        $service = new Service;
-
-        $service->nom = $validated['nom'];
-        $service->prix = $validated['prix'];
-        $service->type = $validated['type'];
-        $service->prestation_id = $validated['prestation_id'];
-
-        $service->save();
-
+        $service = ServiceService::store($validated);
         $data = [
             'success' => true,
             'data' => $service
@@ -100,14 +92,7 @@ class ServiceController extends Controller
     public function update(UpdateServiceRequest $request, Service $service)
     {
         $validated = $request->validated();
-
-        $service->nom = $validated['nom'];
-        $service->prix = $validated['prix'];
-        $service->type = $validated['type'] ?? "particulier";
-        $service->prestation_id = $validated['prestation_id'];
-
-        $service->save();
-
+        $service = ServiceService::update($validated, $service);
         $data = [
             'success' => true,
             'data' => $service
@@ -124,11 +109,9 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        $service->delete();
-
         $data = [
             'success' => true,
-            'data' => $service
+            'data' => ServiceService::delete($service)
         ];
         
         return response()->json($data);

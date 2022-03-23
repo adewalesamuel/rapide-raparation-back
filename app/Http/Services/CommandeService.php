@@ -3,8 +3,6 @@
 namespace App\Http\Services;
 
 use Illuminate\Http\Request;
-use App\Models\Utilisateur;
-use Illuminate\Support\Str;
 use App\Models\Commande;
 
 class CommandeService {
@@ -16,17 +14,10 @@ class CommandeService {
 
         $commandes = $commandes->orderBy('created_at', 'desc')->get();
 
-        $data = [
-            'success' => true,
-            'data' => $commandes
-        ];
-
         return $commandes;
     }
     
     public static function store($validated) {
-        $validated = $request->validated();
-
         $commande = new Commande;
 
         $commande->utilisateur_id = $validated['utilisateur_id'];
@@ -35,6 +26,7 @@ class CommandeService {
         $commande->quantite = $validated['quantite'] ?? 1; 
         $commande->materiel = $validated['materiel'] ?? null;
         $commande->order_id = $validated['order_id'] ?? null;
+        $commande->is_urgent = $validated['is_urgent'] ?? null;
         $commande->lieu = $validated['lieu'] ?? null;
         $commande->description = $validated['description'] ?? null;
 
@@ -46,8 +38,6 @@ class CommandeService {
     }
 
     public static function update($validated, Commande $commande) {
-        $validated = $request->validated();
-
         $commande->utilisateur_id = $validated['utilisateur_id'];
         $commande->service_id = $validated['service_id'];
         $commande->prix = $validated['prix'] ?? null;

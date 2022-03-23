@@ -19,4 +19,14 @@ class Prestation extends Model
     {
         return $this->hasMany(Service::class);
     }
+
+    /**
+     * Get the sous_categories that owns the Prestation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function sous_categorie()
+    {
+        return $this->belongsTo(SousCategorie::class);
+    }
 }

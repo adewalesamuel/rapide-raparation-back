@@ -1,0 +1,36 @@
+.non-verifie, .verifie, .en-cours-visite,
+.valide, .execution, .annule {
+    color: white;
+    font-weight: bolder;
+}
+
+.non-verifie {
+    background-color: red;
+}
+
+.verifie {
+    background-color: #282f8a;
+}
+
+.en-cours-visite {
+    background-color: #dbc33c;
+}
+
+.valide {
+    background-color: #288a50;
+}
+
+.execution {
+    background-color: orange;
+}
+
+.annule {
+    background-color: #3c3c3c;
+}
+.sidebar .nav.sub-menu .nav-item::before {
+    display: none;
+}
+
+a {
+    text-decoration: none;
+}

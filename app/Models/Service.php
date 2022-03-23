@@ -9,4 +9,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Service extends Model
 {
     use HasFactory, SoftDeletes;
+    
+    /**
+     * Get the prestation that owns the Service
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function prestation()
+    {
+        return $this->belongsTo(Prestation::class);
+    }
 }

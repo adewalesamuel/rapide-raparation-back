@@ -4,12 +4,12 @@
         <div class="col-md-6 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">
-                <h4 class="card-title">Créer un nouvel utilisateur</h4>
+                <h4 class="card-title">Créer une nouvelle commande</h4>
                 {{-- <p class="card-description">
                   Basic form layout
                 </p> --}}
                 @include('shared.alert-messages')
-                @include('forms.utilisateur', ['method' => 'POST'])
+                @include('forms.commande', ['method' => 'POST'])
               </div>
             </div>
           </div>

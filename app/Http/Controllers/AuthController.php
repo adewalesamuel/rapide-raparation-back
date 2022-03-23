@@ -21,7 +21,9 @@ class AuthController extends Controller
             case 'administrateur':
                 return redirect()->route('admin.dashboard');
                 break;
-            
+            case 'commercial_terrain':
+                return redirect()->route('commercial-terrain.dashboard');
+                break;
             default:
                 return redirect('/');
                 break;

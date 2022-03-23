@@ -6,6 +6,7 @@ use App\Models\SousCategorie;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreSousCategorie as StoreSousCategorieRequest;
 use App\Http\Requests\UpdateSousCategorie as UpdateSousCategorieRequest;
+use App\Http\Services\SousCategorieService;
 
 class SousCategorieController extends Controller
 {
@@ -16,7 +17,7 @@ class SousCategorieController extends Controller
      */
     public function index()
     {
-        $sous_categories = SousCategorie::all();
+        $sous_categories = SousCategorieService::getAll();
         $data = [
             'success' => true,
             'data' => $sous_categories
@@ -28,7 +29,7 @@ class SousCategorieController extends Controller
     public function prestations(Request $request, SousCategorie $sousCategorie) {
         $data = [
             'success' => true,
-            'data' => $sousCategorie->prestations
+            'data' => SousCategorieService::prestations($sousCategorie)
             ];
 
         return response()->json($data, 200);
@@ -53,14 +54,7 @@ class SousCategorieController extends Controller
     public function store(StoreSousCategorieRequest $request)
     {
         $validated = $request->validated();
-
-        $sous_categorie = new SousCategorie;
-
-        $sous_categorie->nom = $validated['nom'];
-        $sous_categorie->categorie_id = $validated['categorie_id'];
-
-        $sous_categorie->save();
-
+        $sous_categorie = SousCategorieService::store($validated);
         $data = [
             'success' => true,
             'data' => $sous_categorie
@@ -106,12 +100,7 @@ class SousCategorieController extends Controller
     public function update(UpdateSousCategorieRequest $request, SousCategorie $sousCategorie)
     {
         $validated = $request->validated();
-
-        $sousCategorie->nom = $validated['nom'];
-        $sousCategorie->categorie_id = $validated['categorie_id'];
-
-        $sousCategorie->save();
-
+        $sousCategorie = SousCategorieService::update($validated, $sousCategorie);
         $data = [
             'success' => true,
             'data' => $sousCategorie
@@ -128,13 +117,9 @@ class SousCategorieController extends Controller
      */
     public function destroy(SousCategorie $sousCategorie)
     {
-        $sousCategorie->delete();
-        //Prestation
-        //Services
-
         $data = [
             'success' => true,
-            'data' => $sousCategorie
+            'data' => SousCategorieService::delete($sousCategorie)
         ];
         
         return response()->json($data);

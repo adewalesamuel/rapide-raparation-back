@@ -19,7 +19,7 @@
     </div>
     <div class="form-group">
         <label for="type">Type de compte</label>
-        <select class="form-control" name="type" id="type" name="type">
+        <select class="form-control" name="type" id="type">
             @foreach ($types as $type)
             <option value={{$type}} {{ ( isset($utilisateur) && $utilisateur->type == $type) ? "selected" : null }}>{{$type}}</option>
             
@@ -39,12 +39,16 @@
         <input type="text" class="form-control" id="dfe"  name="dfe" placeholder="" value="{{ $utilisateur->dfe ?? '' }}">
     </div>
     <div class="form-group">
-        <label for="pc_code">PC CODE</label>
+      <label for="pc_code">PC CODE</label>
+      @if (auth()->user()->type == "commercial_terrain")
+        <input type="text" class="form-control" id="pc_code" readonly name="pc_code" placeholder="" value="{{ auth()->user()->pc_code ?? '' }}"> 
+      @else
         <input type="text" class="form-control" id="pc_code"  name="pc_code" placeholder="" value="{{ $utilisateur->pc_code ?? '' }}">
+      @endif
     </div>
     <div class="form-group">
       <label for="password">Mot de passe</label>
-      <input type="password" class="form-control" id="password" name="password"  placeholder="" value="{{env('DEFAULT_PASSWORD') ?? ''}}">
+      <input type="text" class="form-control" id="password" name="password"  placeholder="" value="{{env('DEFAULT_PASSWORD') ?? ''}}">
     </div>
     <button type="submit" class="btn btn-primary me-2">Enregister</button>
     <button class="btn btn-secondary" onclick="event.preventDefault(); history.back()">Annuler</button>

@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreUtilisateur as StoreUtilisateurRequest;
 use App\Http\Requests\UpdateUtilisateur as UpdateUtilisateurRequest;
 use App\Models\Utilisateur;
-use Illuminate\Support\Str;
 use App\Http\Services\UtilisateurService;
 
 class UtilisateurController extends Controller
@@ -52,9 +51,12 @@ class UtilisateurController extends Controller
     {
         $validated = $request->validated();
 
-        $utilisateur = UtilisateurService::store($validated);
+        UtilisateurService::store($validated);
 
         $msg = "L'utilisateur a été créé avec succes !";
+
+        if (auth()->user()->type == 'commercial_terrain')
+            return redirect()->back()->with('success', $msg);
 
         return redirect()->route('admin.utilisateurs.index')->with('success', $msg);
     }
@@ -79,7 +81,7 @@ class UtilisateurController extends Controller
     public function edit(Utilisateur $utilisateur)
     {
         $data = [
-            'title' => "Liste des utilisateurs",
+            'title' => "Modifier l'utilisateur",
             'types' => ['client', 'commercial_terrain', 'commercial_sedentaire', 'commercial_grand_compte', 'responsable_technique', 'technicien', 'prestataire', 'commercial_influenceur', 'administrateur'],
             'utilisateur' => $utilisateur
         ];
@@ -98,7 +100,7 @@ class UtilisateurController extends Controller
     {
         $validated = $request->validated();
 
-        $utilisateur = UtilisateurService::update($validated, $utilisateur);
+        UtilisateurService::update($validated, $utilisateur);
 
         $msg = "L'utilisateur a été modifié avec succes !";
 
@@ -113,7 +115,7 @@ class UtilisateurController extends Controller
      */
     public function destroy(Utilisateur $utilisateur)
     {
-        $utilisateur = UtilisateurService::delete($utilisateur);
+        UtilisateurService::delete($utilisateur);
 
         $msg = "L'utilisateur a été supprimé avec succes !";
 

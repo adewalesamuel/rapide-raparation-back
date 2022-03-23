@@ -6,9 +6,7 @@ use App\Models\Categorie;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCategorie as StoreCategorieRequest;
 use App\Http\Requests\UpdateCategorie as UpdateCategorieRequest;
-use App\Models\Prestation;
-use App\Models\Service;
-use App\Models\SousCategorie;
+use App\Http\Services\CategorieService;
 
 class CategorieController extends Controller
 {
@@ -19,7 +17,7 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        $categories = Categorie::all();
+        $categories = CategorieService::getAll();
         $data = [
             'success' => true,
             'data' => $categories
@@ -31,7 +29,7 @@ class CategorieController extends Controller
     public function sous_categories(Request $request, Categorie $categorie) {
         $data = [
             'success' => true,
-            'data' => $categorie->sous_categories
+            'data' => CategorieService::sous_categories($categorie)
             ];
 
         return response()->json($data, 200);
@@ -56,12 +54,7 @@ class CategorieController extends Controller
     public function store(StoreCategorieRequest $request)
     {
         $validated = $request->validated();
-
-        $categorie = new Categorie;
-
-        $categorie->nom = $validated['nom'];
-        $categorie->save();
-
+        $categorie = CategorieService::store($validated);
         $data = [
             'success' => true,
             'data' => $categorie
@@ -107,10 +100,7 @@ class CategorieController extends Controller
     public function update(UpdateCategorieRequest $request, Categorie $categorie)
     {
         $validated = $request->validated();
-
-        $categorie->nom = $validated['nom'];
-        $categorie->save();
-
+        $categorie = CategorieService::update($validated, $categorie);
         $data = [
             'success' => true,
             'data' => $categorie
@@ -127,24 +117,9 @@ class CategorieController extends Controller
      */
     public function destroy(Categorie $categorie)
     {   
-        $sous_categories = SousCategorie::where('categorie_id', $categorie->id);
-        $sous_categorie_ids = $sous_categories->get()->map(function ($item, $key) {
-            return $item->id;
-        });
-        $prestations = Prestation::whereIn('sous_categorie_id', $sous_categorie_ids);
-        $prestations_ids = $prestations->get()->map(function ($item, $key) {
-            return $item->id;
-        });
-        $services = Service::whereIn('prestation_id', $prestations_ids);
-
-        $categorie->delete();
-        $sous_categories->delete();
-        $prestations->delete();
-        $services->delete();
-
         $data = [
             'success' => true,
-            'data' => $categorie
+            'data' => CategorieService::delete($categorie)
         ];
         
         return response()->json($data);

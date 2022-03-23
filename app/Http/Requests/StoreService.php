@@ -27,7 +27,8 @@ class StoreService extends FormRequest
             'nom' => 'required|string',
             'prix' => 'required|integer',
             'type' => 'required|string',
-            'prestation_id' => 'required|integer|exists:prestations,id'
+            'prestation_id' => 'required|integer|exists:prestations,id',
+            'description' => 'nullable|string'
         ];
     }
 }

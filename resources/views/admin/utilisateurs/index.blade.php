@@ -3,7 +3,7 @@
 <div class="card">
   @include('shared.alert-messages')
   <div class="card-body">
-    <h4 class="card-title">Liste des utilisateurs</h4>
+    <h4 class="card-title">Liste des utilisateurs “{{request()->query('type') ?? 'client'}}“</h4>
     <div style="text-align: right">
       <a href="{{ route('admin.utilisateurs.create') }}" class="btn btn-sm btn-primary">
           <i class=" mdi mdi-plus font-20" style="vertical-align: middle"></i> Créer un utilisateur
@@ -19,7 +19,6 @@
             <th>Nom Prénom(s)</th>
             <th>Addresse mail</th>
             <th>N° de téléphone</th>
-            <th>Type</th>
             <th>Nom de l'entreprise</th>
             <th>Actions</th>
           </tr>
@@ -34,7 +33,6 @@
                   </td>
                   <td>{{$utilisateur->mail ?? ""}}</td>
                   <td>{{$utilisateur->telephone ?? ""}}</td>
-                  <td>{{$utilisateur->type ?? ""}}</td>
                   <td>{{$utilisateur->nom_entreprise ?? ""}}</td>
                   <td>
                     <a title="Supprimer">

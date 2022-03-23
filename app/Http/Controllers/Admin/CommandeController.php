@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Services\CommandeService;
-use App\Model\Commande;
+use App\Models\Commande;
 use App\Http\Requests\StoreCommande as StoreCommandeRequest;
 use App\Http\Requests\UpdateCommande as UpdateCommandeRequest;
+use App\Models\Service;
+use App\Models\Utilisateur;
+use Dflydev\DotAccessData\Util;
 
 class CommandeController extends Controller
 {
@@ -35,7 +38,8 @@ class CommandeController extends Controller
     {
         $data = [
             'title' => "Creer une commande",
-            'status' => ['non-verifie', 'appel', 'verifie', 'en-cours-visite', 'fin-visite', 'valide', 'annule', 'execution', 'termine']
+            'utilisateurs' => Utilisateur::where('type', 'client')->get(),
+            'services' => Service::all()
         ];
 
         return view('admin.commandes.create', $data);
@@ -78,8 +82,11 @@ class CommandeController extends Controller
     public function edit(Commande $commande)
     {
         $data = [
-            'title' => "Liste des commandes",
-            'status' => ['non-verifie', 'appel', 'verifie', 'en-cours-visite', 'fin-visite', 'valide', 'annule', 'execution', 'termine'],
+            'title' => "Details de la commande",
+            'statuses' => ['non-verifie', 'appel', 'verifie', 'en-cours-visite', 'fin-visite', 'valide', 'annule', 'execution', 'termine'],
+            'commercial' => Utilisateur::find($commande->commercial_id),
+            'responsable_technique' => Utilisateur::find($commande->responsable_technique_id),
+            'technicien' => Utilisateur::find($commande->technicien_id),
             'commande' => $commande
         ];
 

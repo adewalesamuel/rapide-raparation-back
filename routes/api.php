@@ -9,6 +9,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UtilisateurController;
 use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\CommandeController;
+use App\Http\Controllers\FrontEndController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,10 @@ use App\Http\Controllers\CommandeController;
     //     return $request->user();
     // });
     
-    
+Route::post("/commandes", [CommandeController::class, 'store']);
+
+Route::post("/contact", [FrontEndController::class, 'contact']);
+
 Route::get("/categories", [CategorieController::class, 'index']);
 Route::get("/categories/{categorie}/sous-categories", [CategorieController::class, 'sous_categories']);
 Route::get("/categories/{categorie}", [CategorieController::class, 'show']);
@@ -43,6 +47,7 @@ Route::get("/services/{service}", [ServiceController::class, 'show']);
 
 Route::post('/login', [ApiAuthController::class, 'login']);
 Route::post('/logout', [ApiAuthController::class, 'logout']);
+Route::post('/register', [UtilisateurController::class, 'store']);
     
 Route::middleware('auth.api_token')->group(function() {
     Route::post("/categories", [CategorieController::class, 'store']);
@@ -69,11 +74,7 @@ Route::middleware('auth.api_token')->group(function() {
     
     Route::get("/commandes", [CommandeController::class, 'index']);
     Route::get("/commandes/{commande}", [CommandeController::class, 'show']);
-    Route::post("/commandes", [CommandeController::class, 'store']);
     Route::put("/commandes/{commande}", [CommandeController::class, 'update']);
     Route::delete("/commandes/{commande}", [CommandeController::class, 'destroy']);
-    
-
-
 });
 

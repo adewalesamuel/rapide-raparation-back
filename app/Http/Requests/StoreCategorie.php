@@ -24,7 +24,8 @@ class StoreCategorie extends FormRequest
     public function rules()
     {
         return [
-            'nom' => 'required|string|unique:categories'
+            'nom' => 'required|string|unique:categories',
+            'description' => 'nullable|string'
         ];
     }
 }

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Services\CategorieService;
+use App\Http\Requests\StoreCategorie as StoreCategorieRequest;
+use App\Http\Requests\UpdateCategorie as UpdateCategorieRequest;
+use App\Models\Categorie;
 use Illuminate\Http\Request;
 
 class CategorieController extends Controller
@@ -14,7 +18,12 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'title' => "Liste des categories",
+            'categories' => CategorieService::getAll()
+        ];
+
+        return view('admin.categories.index', $data);
     }
 
     /**
@@ -24,7 +33,11 @@ class CategorieController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'title' => "Creer une categorie"
+        ];
+
+        return view('admin.categories.create', $data);
     }
 
     /**
@@ -33,9 +46,15 @@ class CategorieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategorieRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        CategorieService::store($validated);
+
+        $msg = "La categorie a été créé avec succes !";
+
+        return redirect()->route('admin.categories.index')->with('success', $msg);
     }
 
     /**
@@ -55,9 +74,14 @@ class CategorieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Categorie $categorie)
     {
-        //
+        $data = [
+            'title' => "Modifier la categorie",
+            'categorie' => $categorie
+        ];
+
+        return view('admin.categories.edit', $data);
     }
 
     /**
@@ -67,9 +91,15 @@ class CategorieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCategorieRequest $request, Categorie $categorie)
     {
-        //
+        $validated = $request->validated();
+
+        CategorieService::update($validated, $categorie);
+
+        $msg = "La categorie a été modifié avec succes !";
+
+        return back()->with('success', $msg);
     }
 
     /**
@@ -78,8 +108,12 @@ class CategorieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Categorie $categorie)
     {
-        //
+        CategorieService::delete($categorie);
+
+        $msg = "La categorie a été supprimé avec succes !";
+
+        return redirect()->route('admin.categories.index')->with('success', $msg);
     }
 }

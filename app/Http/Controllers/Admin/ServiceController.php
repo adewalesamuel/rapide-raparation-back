@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Prestation;
+use App\Models\Service;
+use App\Http\Requests\StoreService as StoreServiceRequest;
+use App\Http\Requests\UpdateService as UpdateServiceRequest;
+use App\Http\Services\ServiceService;
 
 class ServiceController extends Controller
 {
@@ -14,7 +19,12 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'title' => "Liste des services",
+            'services' => ServiceService::getAll(),
+        ];
+
+        return view('admin.services.index', $data);
     }
 
     /**
@@ -24,7 +34,13 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'title' => "Creer un service",
+            'prestations' => Prestation::all(),
+            'types' => ['particulier', 'entreprise']
+        ];
+
+        return view('admin.services.create', $data);
     }
 
     /**
@@ -33,9 +49,15 @@ class ServiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreServiceRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        ServiceService::store($validated);
+
+        $msg = "Le service a été créé avec succes !";
+
+        return redirect()->route('admin.services.index')->with('success', $msg);
     }
 
     /**
@@ -55,9 +77,16 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Service $service)
     {
-        //
+        $data = [
+            'title' => "Modifier le service",
+            'service' => $service,
+            'prestations' => Prestation::all(),
+            'types' => ['particulier', 'entreprise']
+        ];
+
+        return view('admin.services.edit', $data);
     }
 
     /**
@@ -67,9 +96,15 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateServiceRequest $request, Service $service)
     {
-        //
+        $validated = $request->validated();
+
+        ServiceService::update($validated, $service);
+
+        $msg = "Le service a été modifié avec succes !";
+
+        return back()->with('success', $msg);
     }
 
     /**
@@ -78,8 +113,12 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Service $service)
     {
-        //
+        ServiceService::delete($service);
+
+        $msg = "La service a été supprimé avec succes !";
+
+        return redirect()->route('admin.services.index')->with('success', $msg);
     }
 }

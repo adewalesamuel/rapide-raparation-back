@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <!-- Required meta tags -->
+  <!-- by samueladewale -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title> {{ $title ?? '' }} | {{ env('APP_NAME') ?? '' }}</title>
@@ -20,12 +20,13 @@
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href={{asset("css/vertical-layout-light/style.css")}}>
+  <link rel="stylesheet" href={{asset("css/main.css")}}>
   <!-- endinject -->
   <link rel="shortcut icon" href={{asset("images/favicon.png")}} />
 </head>
 <body>
   <div class="container-scroller">
-    <div class="row p-0 m-0 proBanner" id="proBanner">
+    {{--<div class="row p-0 m-0 proBanner" id="proBanner">
       <div class="col-md-12 p-0 m-0">
         <div class="card-body card-body-padding d-flex align-items-center justify-content-between">
           <div class="ps-lg-1">
@@ -42,4 +43,4 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}

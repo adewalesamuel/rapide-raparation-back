@@ -19,4 +19,14 @@ class SousCategorie extends Model
     {
         return $this->hasMany(Prestation::class);
     }
+
+    /**
+     * Get the categorie that owns the SousCategorie
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function categorie()
+    {
+        return $this->belongsTo(Categorie::class);
+    }
 }
